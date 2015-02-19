@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{51741688-D518-4396-916F-23F61EC69C61}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.Common", "Sandbox.Common\Sandbox.Common.csproj", "{FB023EE7-6454-4A11-88C1-C20D9B2681BD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clients", "Clients", "{55BD7F35-4A91-49C8-831B-9D59092B5ED5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.WebApi", "Sandbox.WebApi\Sandbox.WebApi.csproj", "{FB26E4F3-8D11-4548-9F49-9C914B8B57F1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FB023EE7-6454-4A11-88C1-C20D9B2681BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB023EE7-6454-4A11-88C1-C20D9B2681BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB023EE7-6454-4A11-88C1-C20D9B2681BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB023EE7-6454-4A11-88C1-C20D9B2681BD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB26E4F3-8D11-4548-9F49-9C914B8B57F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB26E4F3-8D11-4548-9F49-9C914B8B57F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB26E4F3-8D11-4548-9F49-9C914B8B57F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB26E4F3-8D11-4548-9F49-9C914B8B57F1}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FB023EE7-6454-4A11-88C1-C20D9B2681BD} = {51741688-D518-4396-916F-23F61EC69C61}
+		{FB26E4F3-8D11-4548-9F49-9C914B8B57F1} = {55BD7F35-4A91-49C8-831B-9D59092B5ED5}
+	EndGlobalSection
+EndGlobal
