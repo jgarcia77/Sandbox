@@ -23,6 +23,22 @@ namespace Sandbox.WebApi
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
+                    "~/Scripts/angular.js",
+                        "~/Scripts/angular-animate.js",
+                        "~/Scripts/angular-route.js",
+                        "~/Scripts/angular-sanitize.js",
+                        "~/Scripts/angular-touch.js",
+                        "~/Scripts/angular-cookies.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angularapp").Include(
+                    "~/Assets/Scripts/app.js"
+                ));
+
+            bundles.Add(new ScriptBundle("~/bundles/angularcomponents").Include(
+                    "~/Assets/Controllers/index-controller.js"
+                ));
         }
     }
 }
