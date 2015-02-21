@@ -2,11 +2,11 @@
 
     var angularApp = angular.module("SandBox");
 
-    angularApp.controller("indexController", ["$scope", indexController]);
+    angularApp.controller("indexController", ["$scope", "settings", indexController]);
         
-    function indexController($scope) {
+    function indexController($scope, settings) {
 
-        $scope.Message = "Index Controller";
+        $scope.Message = settings.webApiBaseUrl;
 
     }
 

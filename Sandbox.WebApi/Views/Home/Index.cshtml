@@ -1,4 +1,7 @@
-﻿<div ng-view="" class="view view-animate" ng-cloak></div>
+﻿@model Sandbox.WebApi.Models.SettingsViewModel
+
+
+<div ng-view="" class="view view-animate" ng-cloak></div>
 
 @*<div>
     <div class="jumbotron">
@@ -28,3 +31,15 @@
         </div>
     </div>
 </div>*@
+
+
+@section scripts{
+    
+    <script>
+        (function () {
+            angular.module('SandBox')
+                .constant('settings', @Html.Raw(Model.SettingsJson));
+        })();
+    </script>
+
+}
