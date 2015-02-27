@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.WebApi.Only", "Sand
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.MVC", "Sandbox.MVC\Sandbox.MVC.csproj", "{09DBEE0D-618F-4E77-91B2-C7E3A5CA05FD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.GuidGenerator", "Sandbox.GuidGenerator\Sandbox.GuidGenerator.csproj", "{26C94B92-42E4-4422-9430-96CDB1595D24}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{09DBEE0D-618F-4E77-91B2-C7E3A5CA05FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{09DBEE0D-618F-4E77-91B2-C7E3A5CA05FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09DBEE0D-618F-4E77-91B2-C7E3A5CA05FD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{26C94B92-42E4-4422-9430-96CDB1595D24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26C94B92-42E4-4422-9430-96CDB1595D24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26C94B92-42E4-4422-9430-96CDB1595D24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{26C94B92-42E4-4422-9430-96CDB1595D24}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,5 +52,6 @@ Global
 		{FB26E4F3-8D11-4548-9F49-9C914B8B57F1} = {55BD7F35-4A91-49C8-831B-9D59092B5ED5}
 		{3EF8B96B-2EA8-4196-9B2B-A1C7B3D7F0E4} = {55BD7F35-4A91-49C8-831B-9D59092B5ED5}
 		{09DBEE0D-618F-4E77-91B2-C7E3A5CA05FD} = {55BD7F35-4A91-49C8-831B-9D59092B5ED5}
+		{26C94B92-42E4-4422-9430-96CDB1595D24} = {55BD7F35-4A91-49C8-831B-9D59092B5ED5}
 	EndGlobalSection
 EndGlobal
