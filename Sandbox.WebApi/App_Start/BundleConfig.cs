@@ -25,7 +25,9 @@ namespace Sandbox.WebApi
                       "~/Content/site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/angular").Include(
-                    "~/Scripts/angular.js",
+                        "~/Scripts/angular-file-upload-shim.min.js",
+                        "~/Scripts/angular.js",
+                        "~/Scripts/angular-file-upload.min.js",
                         "~/Scripts/angular-animate.js",
                         "~/Scripts/angular-route.js",
                         "~/Scripts/angular-sanitize.js",

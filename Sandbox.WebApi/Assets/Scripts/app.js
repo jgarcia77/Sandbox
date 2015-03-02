@@ -1,5 +1,5 @@
 ﻿(function () {
-    var angularApp = angular.module("SandBox", ["ngRoute", 'ngSanitize', 'ngAnimate', 'ngCookies']);
+    var angularApp = angular.module("SandBox", ["ngRoute", 'ngSanitize', 'ngAnimate', 'ngCookies', 'angularFileUpload']);
 
     angularApp.config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
         $routeProvider
