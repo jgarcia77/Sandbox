@@ -233,6 +233,11 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Images\jordan-128x128.jpeg" />
+    <Content Include="Images\jordan-16x16.jpeg" />
+    <Content Include="Images\jordan-32x32.jpeg" />
+    <Content Include="Images\jordan-64x64.jpeg" />
+    <Content Include="Images\jordan.jpeg" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
