@@ -25,25 +25,38 @@
 
         var endOfList = false;
 
-        windowElement.on("scroll", function () {
-            $scope.scrollTop = windowElement.scrollTop();
-            $scope.windowHeight = windowElement.height();
-            //$scope.documentHeight = documentElement.height();
+        //windowElement.on("scroll", function () {
+        //    $scope.scrollTop = windowElement.scrollTop();
+        //    $scope.windowHeight = windowElement.height();
 
-            $scope.documentHeight = getDocHeight();
+        //    $scope.documentHeight = getDocHeight();
 
-            var result = ($scope.scrollTop + $scope.windowHeight > $scope.documentHeight - 100)
+        //    var result = ($scope.scrollTop + $scope.windowHeight > $scope.documentHeight - 100)
 
-            if (result && !endOfList) {
+        //    if (result && !endOfList) {
+        //        endOfList = true;
+        //        console.log("near bottom");
+        //    }
+
+        //})
+
+        
+        $(window).scroll(function () {
+
+            var docElement = $(document)[0].documentElement;
+            var winElement = $(window)[0];
+
+            var heightCalc = docElement.scrollHeight - winElement.innerHeight;
+
+            var reachedBottom = heightCalc == winElement.pageYOffset;
+
+            if (reachedBottom && !endOfList) {
                 endOfList = true;
-                console.log("near bottom");
+                console.log("reached the bottom");
             }
 
         })
 
-        //$window.scroll(function () {
-            
-        //})
 
         $scope.Files = null;
         
