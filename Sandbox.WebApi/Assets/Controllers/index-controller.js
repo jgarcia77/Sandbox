@@ -23,6 +23,8 @@
             return height;
         }
 
+        var endOfList = false;
+
         windowElement.on("scroll", function () {
             $scope.scrollTop = windowElement.scrollTop();
             $scope.windowHeight = windowElement.height();
@@ -32,7 +34,8 @@
 
             var result = ($scope.scrollTop + $scope.windowHeight > $scope.documentHeight - 100)
 
-            if (result) {
+            if (result && !endOfList) {
+                endOfList = true;
                 console.log("near bottom");
             }
 
