@@ -28,6 +28,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DA7819
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sandbox.AsynDemo", "Sandbox.AsynDemo\Sandbox.AsynDemo.csproj", "{FC232B91-EEAC-4635-AAC6-7813E193D926}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -62,6 +64,10 @@ Global
 		{66F13293-0CBE-45B1-838A-B738EE1C9146}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66F13293-0CBE-45B1-838A-B738EE1C9146}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66F13293-0CBE-45B1-838A-B738EE1C9146}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC232B91-EEAC-4635-AAC6-7813E193D926}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC232B91-EEAC-4635-AAC6-7813E193D926}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC232B91-EEAC-4635-AAC6-7813E193D926}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC232B91-EEAC-4635-AAC6-7813E193D926}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,5 +80,6 @@ Global
 		{26C94B92-42E4-4422-9430-96CDB1595D24} = {55BD7F35-4A91-49C8-831B-9D59092B5ED5}
 		{F098E7A1-2976-4D97-B455-F6ACEA0873F3} = {55BD7F35-4A91-49C8-831B-9D59092B5ED5}
 		{66F13293-0CBE-45B1-838A-B738EE1C9146} = {55BD7F35-4A91-49C8-831B-9D59092B5ED5}
+		{FC232B91-EEAC-4635-AAC6-7813E193D926} = {55BD7F35-4A91-49C8-831B-9D59092B5ED5}
 	EndGlobalSection
 EndGlobal
