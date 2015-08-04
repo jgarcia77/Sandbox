@@ -19,7 +19,8 @@ namespace Sandbox.ImageResizer
             //ImageHelper_CompareResults();
             //ImageHelper_Resize();
             //ImageHelper_Resize_Shrink();
-            ImageHelper_Resize_Shrink_ToPng();
+            //ImageHelper_Resize_Shrink_ToPng();
+            ImageHelper_Resize_Crop_ToPng();
 
             Console.Read();
         }
@@ -126,6 +127,18 @@ namespace Sandbox.ImageResizer
             var quadrilateral = new Quadrilateral(45, 45);
             helper.ScaleImage(helper.DirectoryName, "oberon_s45_45", quadrilateral, ImageFormat.Png);
             helper.ResizeImage(helper.DirectoryName, "oberon_r45_45", quadrilateral, ImageFormat.Png);
+        }
+
+        private static void ImageHelper_Resize_Crop_ToPng()
+        {
+            var fileName = @"C:\ProgramData\DirectiveBoards\Uploads\Images\Temp\image2.jpg";
+            var helper = new ImageHelper(fileName);
+
+            var quadrilateral = new Quadrilateral(45, 45);
+            var croppedDetails = new CroppedDetails(235, 76, 513, 288, 278, 212);
+
+            helper.ScaleImage(helper.DirectoryName, "image2_s45_45", quadrilateral, ImageFormat.Png, croppedDetails);
+            helper.ResizeImage(helper.DirectoryName, "image2_r45_45", quadrilateral, ImageFormat.Png, croppedDetails);
         }
 
         public static void ResizeImage()

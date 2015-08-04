@@ -161,7 +161,7 @@
             return returnValue;
         }
 
-        public void ScaleImage(string destination, string fileName, Quadrilateral quadrilateral, ImageFormat imageFormatOverride = null)
+        public void ScaleImage(string destination, string fileName, Quadrilateral quadrilateral, ImageFormat imageFormatOverride = null, CroppedDetails croppedDetails = null)
         {
             var ratioX = (double)quadrilateral.Width / this.Image.Width;
             var ratioY = (double)quadrilateral.Height / this.Image.Height;
@@ -172,15 +172,34 @@
 
             var newQuadrilateral = new Quadrilateral(newWidth, newHeight);
 
-            this.ResizeImage(destination, fileName, newQuadrilateral, imageFormatOverride);
+            this.ResizeImage(destination, fileName, newQuadrilateral, imageFormatOverride, croppedDetails);
         }
 
-        public void ResizeImage(string destination, string fileName, Quadrilateral quadrilateral, ImageFormat imageFormatOverride = null)
+        public void ResizeImage(string destination, string fileName, Quadrilateral quadrilateral, ImageFormat imageFormatOverride = null, CroppedDetails croppedDetails = null)
         {
+            var imageFromFile = this.Image;
+
+            if (croppedDetails != null)
+            {
+                var croppedTile = new Bitmap(croppedDetails.Width, croppedDetails.Height);
+
+                croppedTile.SetResolution(this.Image.HorizontalResolution, this.Image.VerticalResolution);
+
+                var croppedGraphic = Graphics.FromImage(croppedTile);
+
+                var croppedArea = new Rectangle(croppedDetails.X1, croppedDetails.Y1, croppedDetails.Width, croppedDetails.Height);
+
+                croppedGraphic.DrawImage(this.Image, 0, 0, croppedArea, GraphicsUnit.Pixel);
+
+                imageFromFile = croppedTile;
+            }
+
             var newImage = new Bitmap(quadrilateral.Width, quadrilateral.Height);
 
+            newImage.SetResolution(imageFromFile.HorizontalResolution, imageFromFile.VerticalResolution);
+                        
             Graphics.FromImage(newImage)
-                    .DrawImage(this.Image, 0, 0, quadrilateral.Width, quadrilateral.Height);
+                    .DrawImage(imageFromFile, 0, 0, quadrilateral.Width, quadrilateral.Height);
 
             if (imageFormatOverride == null)
             {
@@ -205,6 +224,26 @@
         {
             Width = width;
             Height = height;
+        }
+    }
+
+    public class CroppedDetails
+    {
+        public int X1 { get; private set; }
+        public int Y1 { get; private set; }
+        public int X2 { get; private set; }
+        public int Y2 { get; private set; }
+        public int Width { get; private set; }
+        public int Height { get; private set; }
+
+        public CroppedDetails(int x1, int y1, int x2, int y2, int width, int height)
+        {
+            this.X1 = x1;
+            this.Y1 = y1;
+            this.X2 = x2;
+            this.Y2 = y2;
+            this.Width = width;
+            this.Height = height;
         }
     }
 }
