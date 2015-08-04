@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using Sandbox.Common;
 using Sandbox.WebApi.Models;
 using System;
 using System.Collections.Generic;
@@ -33,15 +34,15 @@ namespace Sandbox.WebApi.Controllers
             // uploadedFileInfo object will give you some additional stuff like file length,
             // creation time, directory name, a few filesystem methods etc..
             var uploadedFileInfo = new FileInfo(result.FileData.First().LocalFileName);
-
+                        
             var fileExtension = Path.GetExtension(originalFileName);
 
             var filePath = string.Concat(uploadedFileInfo.FullName, fileExtension);
 
-            File.Move(uploadedFileInfo.FullName, filePath);
 
             // Remove this line as well as GetFormData method if you're not
             // sending any form data with your upload request
+            File.Move(uploadedFileInfo.FullName, filePath);
             var fileUploadObj = GetFormData<UploadDataModel>(result);
 
             // Through the request response you can return an object to the Angular controller
@@ -70,17 +71,21 @@ namespace Sandbox.WebApi.Controllers
         }
 
         // Extracts Request FormatData as a strongly typed model
-        private object GetFormData<T>(MultipartFormDataStreamProvider result)
+        private T GetFormData<T>(MultipartFormDataStreamProvider result)
         {
             if (result.FormData.HasKeys())
             {
                 var unescapedFormData = Uri.UnescapeDataString(result.FormData
                     .GetValues(0).FirstOrDefault() ?? String.Empty);
+
                 if (!String.IsNullOrEmpty(unescapedFormData))
-                    return JsonConvert.DeserializeObject<T>(unescapedFormData);
+                {
+                    var returnValue = JsonHelper.Deserialize<T>(unescapedFormData);
+                    return returnValue;
+                }
             }
 
-            return null;
+            return default(T);
         }
 
         private string GetDeserializedFileName(MultipartFileData fileData)

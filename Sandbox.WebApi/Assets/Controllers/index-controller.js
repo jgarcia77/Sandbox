@@ -74,7 +74,7 @@
                     $scope.upload[index] = $upload.upload({
                         url: "upload/files", // webapi url
                         method: "POST",
-                        data: { fileUploadObj: $scope.fileUploadObj },
+                        data: $scope.fileUploadObj,
                         file: $file
                     }).progress(function (evt) {
                         // get upload percentage
