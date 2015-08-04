@@ -20,7 +20,9 @@ namespace Sandbox.ImageResizer
             //ImageHelper_Resize();
             //ImageHelper_Resize_Shrink();
             //ImageHelper_Resize_Shrink_ToPng();
-            ImageHelper_Resize_Crop_ToPng();
+            //ImageHelper_Resize_Crop_ToPng();
+
+            var emptyGuid = Guid.Empty.ToString();
 
             Console.Read();
         }
@@ -34,8 +36,8 @@ namespace Sandbox.ImageResizer
         }
 
         private static void ImageHelperConstructorTestPass()
-        { 
-            var fileName = @"C:\ProgramData\DirectiveBoards\Uploads\Images\Temp\avatar.png";
+        {
+            var fileName = @"C:\ProgramData\DirectiveBoards\Uploads\Images\Temp\image1.jpg";
             var helper = new ImageHelper(fileName);
             
             Console.WriteLine(helper.ImageExists);
@@ -88,24 +90,23 @@ namespace Sandbox.ImageResizer
 
         private static void ImageHelper_Resize()
         {
-            var fileName = @"C:\ProgramData\DirectiveBoards\Uploads\Images\Temp\avatar.png";
+            var fileName = @"C:\ProgramData\DirectiveBoards\Uploads\Images\Temp\lense4.png";
             var helper = new ImageHelper(fileName);
 
-            var quadrilateral = new Quadrilateral(90, 90);
-            helper.ScaleImage(helper.DirectoryName, "avatar_s90_90", quadrilateral);
-            helper.ResizeImage(helper.DirectoryName, "avatar_r90_90", quadrilateral);
+            var quadrilateral = new Quadrilateral(29, 29);
+            helper.ResizeImage(helper.DirectoryName, "lense_xs", quadrilateral, ImageFormat.Png);
 
-            quadrilateral = new Quadrilateral(90, 25);
-            helper.ScaleImage(helper.DirectoryName, "avatar_s90_25", quadrilateral);
-            helper.ResizeImage(helper.DirectoryName, "avatar_r90_25", quadrilateral);
+            quadrilateral = new Quadrilateral(45, 45);
+            helper.ResizeImage(helper.DirectoryName, "lense_sm", quadrilateral, ImageFormat.Png);
 
-            quadrilateral = new Quadrilateral(25, 90);
-            helper.ScaleImage(helper.DirectoryName, "avatar_s25_90", quadrilateral);
-            helper.ResizeImage(helper.DirectoryName, "avatar_r25_90", quadrilateral);
+            quadrilateral = new Quadrilateral(150, 150);
+            helper.ResizeImage(helper.DirectoryName, "lense_md", quadrilateral, ImageFormat.Png);
 
-            quadrilateral = new Quadrilateral(90, 180);
-            helper.ScaleImage(helper.DirectoryName, "avatar_s90_180", quadrilateral);
-            helper.ResizeImage(helper.DirectoryName, "avatar_r90_180", quadrilateral);
+            quadrilateral = new Quadrilateral(300, 300);
+            helper.ResizeImage(helper.DirectoryName, "lense_lg", quadrilateral, ImageFormat.Png);
+
+            quadrilateral = new Quadrilateral(600, 600);
+            helper.ResizeImage(helper.DirectoryName, "lense_xl", quadrilateral, ImageFormat.Png);
             
         }
 
