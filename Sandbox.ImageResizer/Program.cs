@@ -20,7 +20,7 @@ namespace Sandbox.ImageResizer
             //ImageHelper_Resize();
             //ImageHelper_Resize_Shrink();
             //ImageHelper_Resize_Shrink_ToPng();
-            //ImageHelper_Resize_Crop_ToPng();
+            ImageHelper_Resize_Crop_ToPng();
 
             var emptyGuid = Guid.Empty.ToString();
 
@@ -37,7 +37,7 @@ namespace Sandbox.ImageResizer
 
         private static void ImageHelperConstructorTestPass()
         {
-            var fileName = @"C:\ProgramData\DirectiveBoards\Uploads\Images\Temp\image1.jpg";
+            var fileName = @"C:\ProgramData\DirectiveBoards\Uploads\Images\Temp\logo-light.png";
             var helper = new ImageHelper(fileName);
             
             Console.WriteLine(helper.ImageExists);
@@ -90,23 +90,23 @@ namespace Sandbox.ImageResizer
 
         private static void ImageHelper_Resize()
         {
-            var fileName = @"C:\ProgramData\DirectiveBoards\Uploads\Images\Temp\lense4.png";
+            var fileName = @"C:\ProgramData\DirectiveBoards\Uploads\Images\Temp\logo-light cowboy1.png";
             var helper = new ImageHelper(fileName);
 
-            var quadrilateral = new Quadrilateral(29, 29);
+            var quadrilateral = new Quadrilateral(106, 17);
             helper.ResizeImage(helper.DirectoryName, "lense_xs", quadrilateral, ImageFormat.Png);
 
-            quadrilateral = new Quadrilateral(45, 45);
-            helper.ResizeImage(helper.DirectoryName, "lense_sm", quadrilateral, ImageFormat.Png);
+            //quadrilateral = new Quadrilateral(45, 45);
+            //helper.ResizeImage(helper.DirectoryName, "lense_sm", quadrilateral, ImageFormat.Png);
 
-            quadrilateral = new Quadrilateral(150, 150);
-            helper.ResizeImage(helper.DirectoryName, "lense_md", quadrilateral, ImageFormat.Png);
+            //quadrilateral = new Quadrilateral(150, 150);
+            //helper.ResizeImage(helper.DirectoryName, "lense_md", quadrilateral, ImageFormat.Png);
 
-            quadrilateral = new Quadrilateral(300, 300);
-            helper.ResizeImage(helper.DirectoryName, "lense_lg", quadrilateral, ImageFormat.Png);
+            //quadrilateral = new Quadrilateral(300, 300);
+            //helper.ResizeImage(helper.DirectoryName, "lense_lg", quadrilateral, ImageFormat.Png);
 
-            quadrilateral = new Quadrilateral(600, 600);
-            helper.ResizeImage(helper.DirectoryName, "lense_xl", quadrilateral, ImageFormat.Png);
+            //quadrilateral = new Quadrilateral(600, 600);
+            //helper.ResizeImage(helper.DirectoryName, "lense_xl", quadrilateral, ImageFormat.Png);
             
         }
 
@@ -132,14 +132,14 @@ namespace Sandbox.ImageResizer
 
         private static void ImageHelper_Resize_Crop_ToPng()
         {
-            var fileName = @"C:\ProgramData\DirectiveBoards\Uploads\Images\Temp\image2.jpg";
+            var fileName = @"C:\ProgramData\DirectiveBoards\Uploads\Images\Temp\dpavatar1.jpg";
             var helper = new ImageHelper(fileName);
 
-            var quadrilateral = new Quadrilateral(45, 45);
-            var croppedDetails = new CroppedDetails(235, 76, 513, 288, 278, 212);
+            var quadrilateral = new Quadrilateral(16, 16);
+            var croppedDetails = new CroppedDetails(64, 40, 202, 151, 138, 111);
 
-            helper.ScaleImage(helper.DirectoryName, "image2_s45_45", quadrilateral, ImageFormat.Png, croppedDetails);
-            helper.ResizeImage(helper.DirectoryName, "image2_r45_45", quadrilateral, ImageFormat.Png, croppedDetails);
+            helper.ResizeImage(helper.DirectoryName, "icon_16_16", quadrilateral, ImageFormat.Png, croppedDetails);
+            helper.ResizeImage(helper.DirectoryName, "icon_16_16", quadrilateral, ImageFormat.Icon, croppedDetails);
         }
 
         public static void ResizeImage()
