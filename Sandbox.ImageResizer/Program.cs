@@ -17,10 +17,10 @@ namespace Sandbox.ImageResizer
             //ImageHelperConstructorTestFail();
             //ImageHelperConstructorTestPass();
             //ImageHelper_CompareResults();
-            //ImageHelper_Resize();
+            ImageHelper_Resize();
             //ImageHelper_Resize_Shrink();
             //ImageHelper_Resize_Shrink_ToPng();
-            ImageHelper_Resize_Crop_ToPng();
+            //ImageHelper_Resize_Crop_ToPng();
 
             var emptyGuid = Guid.Empty.ToString();
 
@@ -37,7 +37,7 @@ namespace Sandbox.ImageResizer
 
         private static void ImageHelperConstructorTestPass()
         {
-            var fileName = @"C:\ProgramData\DirectiveBoards\Uploads\Images\Temp\logo-light.png";
+            var fileName = @"C:\ProgramData\DirectiveBoards\Uploads\Images\Temp\bg\bg1.png";
             var helper = new ImageHelper(fileName);
             
             Console.WriteLine(helper.ImageExists);
@@ -90,11 +90,11 @@ namespace Sandbox.ImageResizer
 
         private static void ImageHelper_Resize()
         {
-            var fileName = @"C:\ProgramData\DirectiveBoards\Uploads\Images\Temp\logo-light cowboy1.png";
+            var fileName = @"C:\ProgramData\DirectiveBoards\Uploads\Images\Temp\1.jpg";
             var helper = new ImageHelper(fileName);
 
-            var quadrilateral = new Quadrilateral(106, 17);
-            helper.ResizeImage(helper.DirectoryName, "lense_xs", quadrilateral, ImageFormat.Png);
+            var quadrilateral = new Quadrilateral(1024, 1024);
+            helper.ResizeImage(helper.DirectoryName, "1_collide", quadrilateral, ImageFormat.Jpeg);
 
             //quadrilateral = new Quadrilateral(45, 45);
             //helper.ResizeImage(helper.DirectoryName, "lense_sm", quadrilateral, ImageFormat.Png);
@@ -132,14 +132,14 @@ namespace Sandbox.ImageResizer
 
         private static void ImageHelper_Resize_Crop_ToPng()
         {
-            var fileName = @"C:\ProgramData\DirectiveBoards\Uploads\Images\Temp\dpavatar1.jpg";
+            var fileName = @"C:\ProgramData\DirectiveBoards\Uploads\Images\Temp\db_avatar.png";
             var helper = new ImageHelper(fileName);
 
             var quadrilateral = new Quadrilateral(16, 16);
-            var croppedDetails = new CroppedDetails(64, 40, 202, 151, 138, 111);
+            //var croppedDetails = new CroppedDetails(64, 40, 202, 151, 138, 111);
 
-            helper.ResizeImage(helper.DirectoryName, "icon_16_16", quadrilateral, ImageFormat.Png, croppedDetails);
-            helper.ResizeImage(helper.DirectoryName, "icon_16_16", quadrilateral, ImageFormat.Icon, croppedDetails);
+            //helper.ResizeImage(helper.DirectoryName, "icon_16_16", quadrilateral, ImageFormat.Png, croppedDetails);
+            helper.ResizeImage(helper.DirectoryName, "favicon", quadrilateral, ImageFormat.Icon);
         }
 
         public static void ResizeImage()
