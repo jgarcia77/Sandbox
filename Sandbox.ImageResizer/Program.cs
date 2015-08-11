@@ -90,23 +90,23 @@ namespace Sandbox.ImageResizer
 
         private static void ImageHelper_Resize()
         {
-            var fileName = @"C:\ProgramData\DirectiveBoards\Uploads\Images\Temp\1.jpg";
+            var fileName = @"C:\Users\josueg\Desktop\no_image.png";
             var helper = new ImageHelper(fileName);
 
-            var quadrilateral = new Quadrilateral(1024, 1024);
-            helper.ResizeImage(helper.DirectoryName, "1_collide", quadrilateral, ImageFormat.Jpeg);
+            //var quadrilateral = new Quadrilateral(45, 45);
+            //helper.ResizeImage(helper.DirectoryName, "db_avater_sm", quadrilateral, ImageFormat.Png);
 
-            //quadrilateral = new Quadrilateral(45, 45);
-            //helper.ResizeImage(helper.DirectoryName, "lense_sm", quadrilateral, ImageFormat.Png);
+            var quadrilateral = new Quadrilateral(45, 45);
+            helper.ResizeImage(helper.DirectoryName, "no_image_sm", quadrilateral, ImageFormat.Png);
 
-            //quadrilateral = new Quadrilateral(150, 150);
-            //helper.ResizeImage(helper.DirectoryName, "lense_md", quadrilateral, ImageFormat.Png);
+            quadrilateral = new Quadrilateral(150, 150);
+            helper.ResizeImage(helper.DirectoryName, "no_image_md", quadrilateral, ImageFormat.Png);
 
-            //quadrilateral = new Quadrilateral(300, 300);
-            //helper.ResizeImage(helper.DirectoryName, "lense_lg", quadrilateral, ImageFormat.Png);
+            quadrilateral = new Quadrilateral(300, 300);
+            helper.ResizeImage(helper.DirectoryName, "no_image_lg", quadrilateral, ImageFormat.Png);
 
-            //quadrilateral = new Quadrilateral(600, 600);
-            //helper.ResizeImage(helper.DirectoryName, "lense_xl", quadrilateral, ImageFormat.Png);
+            //quadrilateral = new Quadrilateral(500, 500);
+            //helper.ResizeImage(helper.DirectoryName, "no_image_xl", quadrilateral, ImageFormat.Png);
             
         }
 
