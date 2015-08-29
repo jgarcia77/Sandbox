@@ -9,10 +9,22 @@ using System.Web.Http.Cors;
 namespace Sandbox.WebApi.Controllers
 {
 
-    [EnableCors("*", headers: "*", methods: "*")]
-    [Authorize]
     public class ValuesController : ApiController
     {
+        [HttpGet]
+        [Route("api/numbers/{start}/{end}")]
+        public IHttpActionResult GetNumbers(int start, int end)
+        {
+            var returnList = new List<int>();
+
+            for (var i = start; i <= end; i++)
+            {
+                returnList.Add(i);
+            }
+
+            return Ok(returnList);
+        }
+
         // GET api/values
         public IEnumerable<string> Get()
         {

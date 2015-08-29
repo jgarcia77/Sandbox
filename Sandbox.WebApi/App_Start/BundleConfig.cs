@@ -39,7 +39,8 @@ namespace Sandbox.WebApi
                 ));
 
             bundles.Add(new ScriptBundle("~/bundles/angularcomponents").Include(
-                    "~/Assets/Controllers/index-controller.js"
+                    "~/Assets/Controllers/index-controller.js",
+                    "~/Assets/Controllers/scroll-controller.js"
                 ));
         }
     }

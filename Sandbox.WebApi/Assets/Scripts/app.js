@@ -3,9 +3,13 @@
 
     angularApp.config(["$routeProvider", "$locationProvider", function ($routeProvider, $locationProvider) {
         $routeProvider
-            .when("/", {
+            .when("/index", {
                 templateUrl: "/Assets/Views/index.html",
                 controller: "indexController"
+            })
+            .when("/", {
+                templateUrl: "/Assets/Views/scroll.html",
+                controller: "scrollController"
             })
             .otherwise({
                 redirectTo: "/"
