@@ -2,11 +2,11 @@
 
     var angularApp = angular.module("SandBox");
 
-    angularApp.controller("scrollController", ["$window", "$scope", "$http", scrollController]);
+    angularApp.controller("scrollController",
+        ["$window", "$scope", "$http", "scrollService", scrollController]);
+    
 
-
-
-    function scrollController($window, $scope, $http) {
+    function scrollController($window, $scope, $http, scrollService) {
 
         $scope.model = [];
 
@@ -26,11 +26,11 @@
             }
         }
 
-        var getNumbers = function () {
+        $scope.getNumbers = function () {
             $http.get("api/numbers/" + start + "/" + end).then(onResponse);
         }
 
-        getNumbers();
+        $scope.getNumbers();
 
         //$scope.scrollTop = 0;
         //$scope.windowHeight = 0;
@@ -47,24 +47,22 @@
         //    return height;
         //}
 
-        var endOfList = false;
+        //var endOfList = false;
 
 
-        $(window).scroll(function () {
+        scrollService.init($scope.getNumbers);
 
-            var docElement = $(document)[0].documentElement;
-            var winElement = $(window)[0];
 
-            var heightCalc = docElement.scrollHeight - winElement.innerHeight;
+        //$(window).scroll(function () {
 
-            var reachedBottom = heightCalc == winElement.pageYOffset;
+        //    var reachedBottom = scrollService.reachedBottom()
 
-            if (reachedBottom && !endOfList) {
-                endOfList = end == max;
-                getNumbers();
-            }
+        //    if (reachedBottom && !endOfList) {
+        //        endOfList = end == max;
+        //        $scope.getNumbers();
+        //    }
 
-        })
+        //})
     }
 
 

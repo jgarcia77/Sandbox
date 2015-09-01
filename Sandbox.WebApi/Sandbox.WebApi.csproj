@@ -231,6 +231,7 @@
     <Content Include="Assets\Controllers\scroll-controller.js" />
     <Content Include="Assets\Scripts\app.js" />
     <Content Include="Assets\Scripts\scroll.js" />
+    <Content Include="Assets\Services\scroll-service.js" />
     <Content Include="Assets\Views\index.html" />
     <Content Include="Assets\Views\scroll.html" />
     <Content Include="Content\bootstrap.css" />
