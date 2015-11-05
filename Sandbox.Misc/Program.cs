@@ -18,12 +18,35 @@ namespace Sandbox.Misc
             //    Console.WriteLine(property.Name);
             //}
 
-            var properties = typeof(Instrument).GetProperties();
+            //var properties = typeof(Instrument).GetProperties();
 
-            foreach (var property in properties)
+            //foreach (var property in properties)
+            //{
+            //    Console.WriteLine(property.Name);
+            //}
+
+            var currentUtc = DateTime.Now.ToUniversalTime();
+
+            var currentTime = currentUtc.TimeOfDay;
+            var currentHour = currentTime.Hours;
+
+            DateTime startDateTime;
+
+            if (currentHour < 4)
             {
-                Console.WriteLine(property.Name);
+                startDateTime = 
+                    new DateTime(currentUtc.Year, currentUtc.Month, currentUtc.Day, 4, 0, 0);
             }
+            else
+            {
+                var tomorrowUtc = currentUtc.AddDays(1);
+
+                startDateTime = 
+                    new DateTime(tomorrowUtc.Year, tomorrowUtc.Month, tomorrowUtc.Day, 4, 0, 0);
+            }
+
+            Console.WriteLine(currentTime);
+            Console.WriteLine(currentHour);
 
             Console.Read();
         }
