@@ -45,6 +45,8 @@ namespace Sandbox.Misc
                     new DateTime(tomorrowUtc.Year, tomorrowUtc.Month, tomorrowUtc.Day, 4, 0, 0);
             }
 
+            var dateTimeOffset = new DateTimeOffset(startDateTime);
+
             Console.WriteLine(currentTime);
             Console.WriteLine(currentHour);
 
