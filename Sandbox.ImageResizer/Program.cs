@@ -90,23 +90,24 @@ namespace Sandbox.ImageResizer
 
         private static void ImageHelper_Resize()
         {
-            var fileName = @"C:\Users\josueg\Desktop\orange_exclamation_old.png";
+            var fileName = @"C:\Users\josueg\Desktop\db\MessagesIcon_Grey\MessagesIcon_Grey.ico";
             var helper = new ImageHelper(fileName);
 
-            //var quadrilateral = new Quadrilateral(45, 45);
-            //helper.ResizeImage(helper.DirectoryName, "db_avater_sm", quadrilateral, ImageFormat.Png);
 
             var quadrilateral = new Quadrilateral(20, 20);
-            helper.ResizeImage(helper.DirectoryName, "orange_exclamation", quadrilateral, ImageFormat.Png);
+            helper.ResizeImage(helper.DirectoryName, "board_xs", quadrilateral, ImageFormat.Png);
 
-            //quadrilateral = new Quadrilateral(150, 150);
-            //helper.ResizeImage(helper.DirectoryName, "no_image_md", quadrilateral, ImageFormat.Png);
+            quadrilateral = new Quadrilateral(45, 45);
+            helper.ResizeImage(helper.DirectoryName, "board_sm", quadrilateral, ImageFormat.Png);
+            
+            quadrilateral = new Quadrilateral(150, 150);
+            helper.ResizeImage(helper.DirectoryName, "board_md", quadrilateral, ImageFormat.Png);
 
-            //quadrilateral = new Quadrilateral(300, 300);
-            //helper.ResizeImage(helper.DirectoryName, "no_image_lg", quadrilateral, ImageFormat.Png);
+            quadrilateral = new Quadrilateral(300, 300);
+            helper.ResizeImage(helper.DirectoryName, "board_lg", quadrilateral, ImageFormat.Png);
 
-            //quadrilateral = new Quadrilateral(500, 500);
-            //helper.ResizeImage(helper.DirectoryName, "no_image_xl", quadrilateral, ImageFormat.Png);
+            quadrilateral = new Quadrilateral(500, 500);
+            helper.ResizeImage(helper.DirectoryName, "board_xl", quadrilateral, ImageFormat.Png);
             
         }
 
