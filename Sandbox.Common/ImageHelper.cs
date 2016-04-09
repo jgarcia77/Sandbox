@@ -1,14 +1,14 @@
-﻿namespace Sandbox.Common
+﻿namespace Common.Helpers.Drawing
 {
     using System.Drawing;
     using System.IO;
     using System.Drawing.Imaging;
     using System;
-
-    public enum ImageCompareResults { Equal, Smaller, Bigger, NotDetermined }
+    using System.Linq;
 
     public class ImageHelper
     {
+        public static string[] ValidExtensions = { ".bmp", ".emf", ".exif", ".gif", ".ico", ".jpg", ".jpeg", ".dmp", ".png", ".tiff", ".wmf" };
         public string FileName { get; private set; }
         public bool ImageExists { get; private set; }
         public Image Image { get; private set; }
@@ -22,11 +22,11 @@
                 ImageFormat returnValue = null;
 
                 switch (this.Extension)
-                { 
+                {
                     case ".bmp":
                         returnValue = ImageFormat.Bmp;
                         break;
-                    
+
                     case ".emf":
                         returnValue = ImageFormat.Emf;
                         break;
@@ -124,6 +124,9 @@
             if (File.Exists(this.FileName))
             {
                 this.Initialize();
+                
+                SaveRotateFlip();
+
                 this.ImageExists = true;
             }
             else
@@ -137,40 +140,12 @@
             this.Image = Image.FromFile(this.FileName);
             this.DirectoryName = Path.GetDirectoryName(this.FileName);
             this.FileNameWithoutExtension = Path.GetFileNameWithoutExtension(this.FileName);
-            this.Extension = Path.GetExtension(this.FileName);
-
+            this.Extension = Path.GetExtension(this.FileName).ToLower();
         }
-
-        public ImageCompareResults Compare(Quadrilateral quadrilateral)
-        {
-            ImageCompareResults returnValue = ImageCompareResults.NotDetermined;
-
-            if (this.Image.Width == quadrilateral.Width && this.Image.Height == quadrilateral.Height)
-            {
-                returnValue = ImageCompareResults.Equal;
-            }
-            else if (this.Image.Width < quadrilateral.Width || this.Image.Height < quadrilateral.Height)
-            {
-                returnValue = ImageCompareResults.Smaller;
-            }
-            else if (this.Image.Width > quadrilateral.Width || this.Image.Height > quadrilateral.Height)
-            {
-                returnValue = ImageCompareResults.Bigger;
-            }
-            
-            return returnValue;
-        }
-
+                
         public void ScaleImage(string destination, string fileName, Quadrilateral quadrilateral, ImageFormat imageFormatOverride = null, CroppedDetails croppedDetails = null)
         {
-            var ratioX = (double)quadrilateral.Width / this.Image.Width;
-            var ratioY = (double)quadrilateral.Height / this.Image.Height;
-            var ratio = Math.Min(ratioX, ratioY);
-
-            var newWidth = (int)(this.Image.Width * ratio);
-            var newHeight = (int)(this.Image.Height * ratio);
-
-            var newQuadrilateral = new Quadrilateral(newWidth, newHeight);
+            var newQuadrilateral = quadrilateral.Scale(this.Image.Width, this.Image.Height);
 
             this.ResizeImage(destination, fileName, newQuadrilateral, imageFormatOverride, croppedDetails);
         }
@@ -197,7 +172,7 @@
             var newImage = new Bitmap(quadrilateral.Width, quadrilateral.Height);
 
             newImage.SetResolution(imageFromFile.HorizontalResolution, imageFromFile.VerticalResolution);
-                        
+
             Graphics.FromImage(newImage)
                     .DrawImage(imageFromFile, 0, 0, quadrilateral.Width, quadrilateral.Height);
 
@@ -213,6 +188,73 @@
                 newImage.Save(fileNameNew, imageFormatOverride);
             }
         }
+
+        private void SaveRotateFlip()
+        {
+            var orientationValue = GetOrientationValue();
+
+            var rotateFlipType = GetRotateFlipType(orientationValue);
+
+            SaveRotateFlip(rotateFlipType);
+        }
+
+        private void SaveRotateFlip(RotateFlipType rotateFlipType)
+        {
+            this.Image.RotateFlip(rotateFlipType);
+            this.Image.Save(this.FileName);
+        }
+
+        private int GetOrientationValue()
+        {
+            var returnValue = -1;
+
+            var property = this.Image.PropertyItems.FirstOrDefault(pi => pi.Id == 0x0112);
+
+            if (property != null)
+            {
+                returnValue = this.Image.GetPropertyItem(property.Id).Value[0];
+            }
+
+            return returnValue;
+        }
+
+        private RotateFlipType GetRotateFlipType(int orientationValue)
+        {
+            var returnValue = RotateFlipType.RotateNoneFlipNone;
+
+            switch (orientationValue)
+            {
+                case 1:
+                    returnValue = RotateFlipType.RotateNoneFlipNone;
+                    break;
+                case 2:
+                    returnValue = RotateFlipType.RotateNoneFlipX;
+                    break;
+                case 3:
+                    returnValue = RotateFlipType.Rotate180FlipNone;
+                    break;
+                case 4:
+                    returnValue = RotateFlipType.Rotate180FlipX;
+                    break;
+                case 5:
+                    returnValue = RotateFlipType.Rotate90FlipX;
+                    break;
+                case 6:
+                    returnValue = RotateFlipType.Rotate90FlipNone;
+                    break;
+                case 7:
+                    returnValue = RotateFlipType.Rotate270FlipX;
+                    break;
+                case 8:
+                    returnValue = RotateFlipType.Rotate270FlipNone;
+                    break;
+                default:
+                    returnValue = RotateFlipType.RotateNoneFlipNone;
+                    break;
+            }
+
+            return returnValue;
+        }
     }
 
     public struct Quadrilateral
@@ -224,6 +266,84 @@
         {
             Width = width;
             Height = height;
+        }
+
+        public Quadrilateral Scale(int imageWidth, int imageHeight)
+        {
+            var scaleWidth = 0;
+            var scaleHeight = 0;
+
+            if (imageWidth == this.Width && imageHeight == this.Height)
+            {
+                scaleWidth = imageWidth;
+                scaleHeight = imageHeight;
+            }
+            else 
+            {
+                var largerSide = Math.Max(imageWidth, imageHeight);
+
+                if (largerSide == imageWidth)
+                {
+                    scaleWidth = this.Width;
+
+                    var widthDifference = this.CalculateDifference(imageWidth, this.Width);
+
+                    var widthRation = (decimal)widthDifference / (decimal)imageWidth;
+
+                    scaleHeight = this.CalculateScale(imageHeight, widthRation);
+                }
+                else
+                {
+                    scaleHeight = this.Height;
+
+                    var heightDifference = this.CalculateDifference(imageHeight, this.Height);
+
+                    var heightRation = (decimal)heightDifference / (decimal)imageHeight;
+
+                    scaleWidth = this.CalculateScale(imageWidth, heightRation);
+                }
+            }
+
+
+            return new Quadrilateral(scaleWidth, scaleHeight);
+        }
+
+        private int CalculateDifference(int imageValue, int thresholdValue)
+        {
+            var returnValue = 0;
+
+            if (imageValue > thresholdValue)
+            {
+                // scale image down
+                returnValue = imageValue - thresholdValue;
+            }
+            else if (imageValue < thresholdValue)
+            {
+                // scale image up
+                returnValue = thresholdValue - imageValue;
+            }
+
+            return returnValue;
+        }
+
+        private int CalculateScale(int imageValue, decimal ratio)
+        {
+            var returnValue = 0;
+
+            var adjustment = imageValue * ratio;
+
+            if (ratio < 1)
+            {
+                // scale image down
+                returnValue = (int)Math.Round(imageValue - adjustment);
+            }
+            else
+            {
+                // scale image up
+                returnValue = (int)Math.Round(imageValue + adjustment);
+            }
+
+            return returnValue;
         }
     }
 

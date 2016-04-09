@@ -7,6 +7,7 @@ using System.Drawing;
 using System.IO;
 using System.Drawing.Imaging;
 using Sandbox.Common;
+using Common.Helpers.Drawing;
 
 namespace Sandbox.ImageResizer
 {
@@ -17,19 +18,20 @@ namespace Sandbox.ImageResizer
             //ImageHelperConstructorTestFail();
             //ImageHelperConstructorTestPass();
             //ImageHelper_CompareResults();
-            ImageHelper_Resize();
+            //ImageHelper_Resize();
             //ImageHelper_Resize_Shrink();
             //ImageHelper_Resize_Shrink_ToPng();
             //ImageHelper_Resize_Crop_ToPng();
+            ImageMetadata();
 
             var emptyGuid = Guid.Empty.ToString();
 
             Console.Read();
         }
 
-        private static void ImageHelperConstructorTestFail()
+        private static void ImageMetadata()
         {
-            var fileName = @"C:\Users\JosueG\Desktop\Images\jordan.jpeg";
+            var fileName = @"C:\Users\josueg\Downloads\IMG_4931.JPG";
             var helper = new ImageHelper(fileName);
 
             Console.WriteLine(helper.ImageExists);
@@ -47,46 +49,46 @@ namespace Sandbox.ImageResizer
             Console.WriteLine(string.Format(dimensions, helper.Image.Width, helper.Image.Height));
         }
 
-        private static void ImageHelper_CompareResults()
-        {
-            var fileName = @"C:\ProgramData\DirectiveBoards\Uploads\Images\Temp\avatar.png";
-            var helper = new ImageHelper(fileName);
+        //private static void ImageHelper_CompareResults()
+        //{
+        //    var fileName = @"C:\ProgramData\DirectiveBoards\Uploads\Images\Temp\avatar.png";
+        //    var helper = new ImageHelper(fileName);
 
-            var quadrilateral = new Quadrilateral(45, 45);
-            var result = helper.Compare(quadrilateral);
+        //    var quadrilateral = new Quadrilateral(45, 45);
+        //    var result = helper.Compare(quadrilateral);
 
-            OutputImageCompare(helper.Image, quadrilateral, result);
+        //    OutputImageCompare(helper.Image, quadrilateral, result);
 
-            quadrilateral = new Quadrilateral(90, 25);
-            result = helper.Compare(quadrilateral);
+        //    quadrilateral = new Quadrilateral(90, 25);
+        //    result = helper.Compare(quadrilateral);
 
-            OutputImageCompare(helper.Image, quadrilateral, result);
+        //    OutputImageCompare(helper.Image, quadrilateral, result);
 
-            quadrilateral = new Quadrilateral(25, 90);
-            result = helper.Compare(quadrilateral);
+        //    quadrilateral = new Quadrilateral(25, 90);
+        //    result = helper.Compare(quadrilateral);
 
-            OutputImageCompare(helper.Image, quadrilateral, result);
+        //    OutputImageCompare(helper.Image, quadrilateral, result);
 
-            quadrilateral = new Quadrilateral(25, 90);
-            result = helper.Compare(quadrilateral);
+        //    quadrilateral = new Quadrilateral(25, 90);
+        //    result = helper.Compare(quadrilateral);
 
-            OutputImageCompare(helper.Image, quadrilateral, result);
+        //    OutputImageCompare(helper.Image, quadrilateral, result);
 
-            quadrilateral = new Quadrilateral(25, 25);
-            result = helper.Compare(quadrilateral);
+        //    quadrilateral = new Quadrilateral(25, 25);
+        //    result = helper.Compare(quadrilateral);
 
-            OutputImageCompare(helper.Image, quadrilateral, result);
-        }
+        //    OutputImageCompare(helper.Image, quadrilateral, result);
+        //}
 
-        private static void OutputImageCompare(Image image, Quadrilateral quadrilateral, ImageCompareResults result)
-        {
-            Console.WriteLine("--------------------------------------------------");
-            Console.WriteLine("Result: {0}", result);
-            Console.WriteLine("Image Width: {0}", image.Width);
-            Console.WriteLine("Image Height: {0}", image.Height);
-            Console.WriteLine("New Width: {0}", quadrilateral.Width);
-            Console.WriteLine("New Height: {0}", quadrilateral.Height);
-        }
+        //private static void OutputImageCompare(Image image, Quadrilateral quadrilateral, ImageCompareResults result)
+        //{
+        //    Console.WriteLine("--------------------------------------------------");
+        //    Console.WriteLine("Result: {0}", result);
+        //    Console.WriteLine("Image Width: {0}", image.Width);
+        //    Console.WriteLine("Image Height: {0}", image.Height);
+        //    Console.WriteLine("New Width: {0}", quadrilateral.Width);
+        //    Console.WriteLine("New Height: {0}", quadrilateral.Height);
+        //}
 
         private static void ImageHelper_Resize()
         {
