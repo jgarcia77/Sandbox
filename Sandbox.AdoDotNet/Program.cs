@@ -13,7 +13,7 @@ namespace Sandbox.AdoDotNet
     {
         static string connectionString;
         static SqlConnection conn;
-        static IEnumerable<BoardPost> boardPosts;
+        static IQueryable<BoardPost> boardPosts;
 
         static void Main(string[] args)
         {
@@ -36,21 +36,21 @@ namespace Sandbox.AdoDotNet
             {
                 var reader = command.ExecuteReader();
 
-                boardPosts = reader.Cast<IDataRecord>().Select(record => new BoardPost { Id = record.GetInt64(0), Message = record.GetString(1), IsActive = record.GetBoolean(2), CreatedMemberId = record.GetInt64(3), CreatedDate = record.GetDateTime(4), UpdatedMemberId = record.GetInt64(5), UpdatedDate = record.GetDateTime(6), BoardTopicId = record.GetInt64(7) });
+                boardPosts = reader.Cast<IDataRecord>().Select(record => new BoardPost { Id = record.GetInt64(0), Message = record.GetString(1), IsActive = record.GetBoolean(2), CreatedMemberId = record.GetInt64(3), CreatedDate = record.GetDateTime(4), UpdatedMemberId = record.GetInt64(5), UpdatedDate = record.GetDateTime(6), BoardTopicId = record.GetInt64(7) }).AsQueryable();
             }
 
-            //Console.WriteLine(boardPosts.Count());
+            Console.WriteLine(boardPosts.Count());
 
-            var enumerator = boardPosts.GetEnumerator();
+            //var enumerator = boardPosts.GetEnumerator();
 
-            if (enumerator.MoveNext())
-            {
-                var post = enumerator.Current.Message;
+            //if (enumerator.MoveNext())
+            //{
+            //    var post = enumerator.Current.Message;
 
-                Console.WriteLine(post);
-            }
+            //    Console.WriteLine(post);
+            //}
 
-            //Console.WriteLine(boardPosts.Count());
+            Console.WriteLine(boardPosts.Count());
 
             //var first = boardPosts.FirstOrDefault(bp => bp.Id == 1);
 
