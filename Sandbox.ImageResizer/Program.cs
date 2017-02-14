@@ -8,6 +8,7 @@ using System.IO;
 using System.Drawing.Imaging;
 using Sandbox.Common;
 using Common.Helpers.Drawing;
+using System.Diagnostics;
 
 namespace Sandbox.ImageResizer
 {
@@ -22,11 +23,30 @@ namespace Sandbox.ImageResizer
             //ImageHelper_Resize_Shrink();
             //ImageHelper_Resize_Shrink_ToPng();
             //ImageHelper_Resize_Crop_ToPng();
-            ImageMetadata();
+            //ImageMetadata();
 
-            var emptyGuid = Guid.Empty.ToString();
+            ImageToBase64();
 
             Console.Read();
+        }
+
+        private static void ImageToBase64()
+        {
+            var fileName = @"C:\Users\josueg\Documents\Projects\Deloitte\ToDos\Tasks\Sprint_8_WrapUpHoldNotification_31197\sponsors.png";
+
+            using (var image = Image.FromFile(fileName))
+            {
+                using (var ms = new MemoryStream())
+                {
+                    image.Save(ms, image.RawFormat);
+
+                    var bytes = ms.ToArray();
+
+                    var base64 = Convert.ToBase64String(bytes);
+
+                    Debug.WriteLine(base64);
+                }
+            }
         }
 
         private static void ImageMetadata()
