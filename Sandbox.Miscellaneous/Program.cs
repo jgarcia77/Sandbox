@@ -52,9 +52,9 @@ namespace Sandbox.Miscellaneous
 
                 var scaledValue = d / scale;
 
-                var roundedValue = Math.Round(scaledValue, digits, MidpointRounding.AwayFromZero);
+                var roundedScaledValue = Math.Round(scaledValue, digits, MidpointRounding.AwayFromZero);
 
-                var rawValue = scale * roundedValue;
+                var rawValue = scale * roundedScaledValue;
 
                 var mantissaLength = (int)characteristicLength >= digits ? 0 : digits - (int)characteristicLength;
 
