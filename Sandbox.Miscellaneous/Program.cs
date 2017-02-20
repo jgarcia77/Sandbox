@@ -25,7 +25,7 @@ namespace Sandbox.Miscellaneous
                 {
                     var inputDouble = Convert.ToDouble(input);
 
-                    var roundDouble = TruncateToSignificantDigits(inputDouble, 4);
+                    var roundDouble = RoundSignificantDigits(inputDouble, 4);
 
                     Console.WriteLine(roundDouble);
                     Console.WriteLine(roundDouble.ToString("##,###.####"));
@@ -37,7 +37,7 @@ namespace Sandbox.Miscellaneous
             }
         }
 
-        static double TruncateToSignificantDigits(double d, int digits)
+        static double RoundSignificantDigits(double d, int digits)
         {
             var returnValue = 0.0;
 
