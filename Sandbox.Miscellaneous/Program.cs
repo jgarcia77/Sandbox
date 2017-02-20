@@ -38,26 +38,30 @@ namespace Sandbox.Miscellaneous
 
         static double TruncateToSignificantDigits(double d, int digits)
         {
-            if (d == 0.0)
-            {
-                return 0.0;
-            }
-            else
-            {
-                double leftSideNumbers = Math.Floor(Math.Log10(Math.Abs(d))) + 1;
-                double scale = Math.Pow(10, leftSideNumbers);
-                double result = scale * Math.Round(d / scale, digits, MidpointRounding.AwayFromZero);
+            var returnValue = 0.0;
 
-                // Clean possible precision error.
-                if ((int)leftSideNumbers >= digits)
-                {
-                    return Math.Round(result, 0, MidpointRounding.AwayFromZero);
-                }
-                else
-                {
-                    return Math.Round(result, digits - (int)leftSideNumbers, MidpointRounding.AwayFromZero);
-                }
+            if (d != 0.0)
+            {
+                var absValue = Math.Abs(d);
+
+                var log10Value = Math.Log10(absValue);
+
+                var characteristicLength = Math.Floor(log10Value) + 1;
+
+                var scale = Math.Pow(10, characteristicLength);
+
+                var scaledValue = d / scale;
+
+                var roundedValue = Math.Round(scaledValue, digits, MidpointRounding.AwayFromZero);
+
+                var rawValue = scale * roundedValue;
+
+                var mantissaLength = (int)characteristicLength >= digits ? 0 : digits - (int)characteristicLength;
+
+                returnValue = Math.Round(rawValue, mantissaLength, MidpointRounding.AwayFromZero);
             }
+
+            return returnValue;
         }
 
     }
