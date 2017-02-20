@@ -28,6 +28,7 @@ namespace Sandbox.Miscellaneous
                     var roundDouble = TruncateToSignificantDigits(inputDouble, 4);
 
                     Console.WriteLine(roundDouble);
+                    Console.WriteLine(roundDouble.ToString("##,###.####"));
                 }
                 catch
                 {
