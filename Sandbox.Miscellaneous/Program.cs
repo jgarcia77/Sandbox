@@ -37,13 +37,13 @@ namespace Sandbox.Miscellaneous
             }
         }
 
-        static double RoundSignificantDigits(double d, int digits)
+        static double RoundSignificantDigits(double value, int digits)
         {
             var returnValue = 0.0;
 
-            if (d != 0.0)
+            if (value != 0.0)
             {
-                var absValue = Math.Abs(d);
+                var absValue = Math.Abs(value);
 
                 var log10Value = Math.Log10(absValue);
 
@@ -51,7 +51,7 @@ namespace Sandbox.Miscellaneous
 
                 var scale = Math.Pow(10, characteristicLength);
 
-                var scaledValue = d / scale;
+                var scaledValue = value / scale;
 
                 var roundedScaledValue = Math.Round(scaledValue, digits, MidpointRounding.AwayFromZero);
 
