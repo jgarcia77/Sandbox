@@ -28,13 +28,68 @@ namespace Sandbox.Miscellaneous
                     var roundDouble = RoundSignificantDigits(inputDouble, 4);
 
                     Console.WriteLine(roundDouble);
-                    Console.WriteLine(roundDouble.ToString("##,###.####"));
+                    Console.WriteLine(FormatPrecise(roundDouble));
                 }
                 catch
                 {
                     continue;
                 }
             }
+        }
+
+        static string FormatPrecise(double value)
+        {
+            var returnValue = "0.0";
+
+            if (value != 0.0)
+            {
+                var valueArray = Math.Abs(value).ToString().Split('.');
+
+                var characteristicLength = 0;
+                var mantissaLength = 0;
+                
+                if (valueArray.Length == 1)
+                {
+                    characteristicLength = valueArray[0].Length;
+                    mantissaLength = 0;
+                }
+                else
+                {
+                    characteristicLength = valueArray[0].Length;
+                    mantissaLength = valueArray[1].Length;
+                }
+
+                var formatter = new StringBuilder();
+
+                var digitCounter = 0;
+
+                for (var i = 0; i < characteristicLength; i++)
+                {
+                    digitCounter++;
+
+                    if (digitCounter > 3)
+                    {
+                        digitCounter++;
+                        formatter.Insert(0, ",");
+                    }
+
+                    formatter.Insert(0, "0");
+                }
+
+                if (mantissaLength != 0)
+                {
+                    formatter.Append(".");
+
+                    for (var i = 0; i < mantissaLength; i++)
+                    {
+                        formatter.Append("0");
+                    }
+                }
+
+                returnValue = value.ToString(formatter.ToString());
+            }
+
+            return returnValue;
         }
 
         static double RoundSignificantDigits(double value, int digits)
