@@ -39,27 +39,17 @@ namespace Sandbox.Miscellaneous
 
         static string FormatPrecise(double value)
         {
-            var returnValue = "0.0";
+            var returnValue = "0";
 
-            if (value != 0.0)
+            if (value != 0)
             {
+                var formatter = new StringBuilder();
+
                 var valueArray = Math.Abs(value).ToString().Split('.');
 
-                var characteristicLength = 0;
-                var mantissaLength = 0;
-                
-                if (valueArray.Length == 1)
-                {
-                    characteristicLength = valueArray[0].Length;
-                    mantissaLength = 0;
-                }
-                else
-                {
-                    characteristicLength = valueArray[0].Length;
-                    mantissaLength = valueArray[1].Length;
-                }
+                var characteristicLength = valueArray[0].Length;
 
-                var formatter = new StringBuilder();
+                var mantissaLength = valueArray.Length == 1 ? 0 : valueArray[1].Length;
 
                 var digitCounter = 0;
 
@@ -85,7 +75,7 @@ namespace Sandbox.Miscellaneous
                         formatter.Append("0");
                     }
                 }
-
+                
                 returnValue = value.ToString(formatter.ToString());
             }
 
@@ -93,6 +83,26 @@ namespace Sandbox.Miscellaneous
         }
 
         static double RoundSignificantDigits(double value, int digits)
+        {
+            var returnValue = 0.0;
+
+            if (value != 0.0)
+            {
+                var absValue = Math.Abs(value);
+                
+                var characteristicLength = absValue < Math.Pow(10, -6) ? 1 : Math.Floor(Math.Log10(absValue)) + 1;
+                
+                var scaledValue = value / Math.Pow(10, characteristicLength);
+
+                var rawValue = Math.Floor(scaledValue * Math.Pow(10, digits) + 0.5);
+
+                returnValue = rawValue / Math.Pow(10, digits - characteristicLength);
+            }
+
+            return returnValue;
+        }
+
+        static double RoundSignificantDigits_Original(double value, int digits)
         {
             var returnValue = 0.0;
 
