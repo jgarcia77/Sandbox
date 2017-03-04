@@ -1,0 +1,15 @@
+﻿{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "emitEntryPoint": true
+  },
+
+  "dependencies": {
+    "DocumentFormat.OpenXml": "2.5.0",
+    "WindowsBase": "4.6.1055"
+  },
+
+  "frameworks": {
+    "net461": {}
+  }
+}

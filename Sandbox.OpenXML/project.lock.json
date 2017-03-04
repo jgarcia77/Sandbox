@@ -1,0 +1,57 @@
+{
+  "locked": false,
+  "version": 2,
+  "targets": {
+    ".NETFramework,Version=v4.6.1": {
+      "DocumentFormat.OpenXml/2.5.0": {
+        "type": "package",
+        "compile": {
+          "lib/DocumentFormat.OpenXml.dll": {}
+        },
+        "runtime": {
+          "lib/DocumentFormat.OpenXml.dll": {}
+        }
+      },
+      "WindowsBase/4.6.1055": {
+        "type": "package",
+        "compile": {
+          "lib/WindowsBase.dll": {}
+        },
+        "runtime": {
+          "lib/WindowsBase.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "DocumentFormat.OpenXml/2.5.0": {
+      "sha512": "H5jnox0hcLwzAjrpNqDPIItjh7dplF1kk1z8LatpI2h75wBgps1MepEttJFKs7xedQReCMHA0tGpNI0H2B+Mrg==",
+      "type": "package",
+      "path": "DocumentFormat.OpenXml/2.5.0",
+      "files": [
+        "DocumentFormat.OpenXml.2.5.0.nupkg.sha512",
+        "DocumentFormat.OpenXml.nuspec",
+        "lib/DocumentFormat.OpenXml.dll"
+      ]
+    },
+    "WindowsBase/4.6.1055": {
+      "sha512": "1NKRZTcRus8Q1ZPZz9QAucHYHLHmQ3G+MMaFFZyPTDRpEfmIFLo9mtSyO8TZkEJFXaNXvnhenPod4ltd8EOHkg==",
+      "type": "package",
+      "path": "WindowsBase/4.6.1055",
+      "files": [
+        "WindowsBase.4.6.1055.nupkg.sha512",
+        "WindowsBase.nuspec",
+        "lib/WindowsBase.dll"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    "": [
+      "DocumentFormat.OpenXml >= 2.5.0",
+      "WindowsBase >= 4.6.1055"
+    ],
+    ".NETFramework,Version=v4.6.1": []
+  },
+  "tools": {},
+  "projectFileToolGroups": {}
+}
