@@ -38,10 +38,7 @@ namespace Sandbox.OpenXML
         // Generates content of workbookPart1.
         private static void GenerateWorkbookPart1Content(WorkbookPart workbookPart1)
         {
-            Workbook workbook1 = new Workbook() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "x15" } };
-            workbook1.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
-            workbook1.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
-            workbook1.AddNamespaceDeclaration("x15", "http://schemas.microsoft.com/office/spreadsheetml/2010/11/main");
+            var workbook1 = new Workbook();
 
             Sheets sheets1 = new Sheets();
 
@@ -182,10 +179,7 @@ namespace Sandbox.OpenXML
         // Generates content of worksheetPart1.
         private static void GenerateWorksheetPart1Content(WorksheetPart worksheetPart1)
         {
-            Worksheet worksheet1 = new Worksheet() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "x14ac" } };
-            worksheet1.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
-            worksheet1.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
-            worksheet1.AddNamespaceDeclaration("x14ac", "http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac");
+            var worksheet1 = new Worksheet();
 
             Columns columns1 = new Columns();
             Column column1 = new Column() { Min = (UInt32Value)1U, Max = (UInt32Value)1U, Width = 14.453125D, BestFit = true, CustomWidth = true };
