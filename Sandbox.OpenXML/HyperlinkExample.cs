@@ -217,6 +217,64 @@ namespace Sandbox.OpenXML
             SharedStringTable sharedStringTable1 = new SharedStringTable() { Count = (UInt32Value)1U, UniqueCount = (UInt32Value)1U };
 
             SharedStringItem sharedStringItem1 = new SharedStringItem();
+            
+            Run run1 = new Run();
+
+            RunProperties runProperties1 = new RunProperties();
+            FontSize fontSize3 = new FontSize() { Val = 11D };
+            Color color3 = new Color() { Theme = (UInt32Value)1U };
+            RunFont runFont1 = new RunFont() { Val = "Calibri" };
+            FontFamily fontFamily1 = new FontFamily() { Val = 2 };
+            FontScheme fontScheme4 = new FontScheme() { Val = FontSchemeValues.Minor };
+
+            runProperties1.Append(fontSize3);
+            runProperties1.Append(color3);
+            runProperties1.Append(runFont1);
+            runProperties1.Append(fontFamily1);
+            runProperties1.Append(fontScheme4);
+            Text text1 = new Text();
+            text1.Text = "Click here to visit ";
+            text1.Space = SpaceProcessingModeValues.Preserve;
+
+            run1.Append(runProperties1);
+            run1.Append(text1);
+
+            Run run2 = new Run();
+
+            RunProperties runProperties2 = new RunProperties();
+            Underline underline2 = new Underline();
+            FontSize fontSize4 = new FontSize() { Val = 11D };
+            Color color4 = new Color() { Theme = (UInt32Value)10U };
+            RunFont runFont2 = new RunFont() { Val = "Calibri" };
+            FontFamily fontFamily2 = new FontFamily() { Val = 2 };
+            FontScheme fontScheme5 = new FontScheme() { Val = FontSchemeValues.Minor };
+
+            runProperties2.Append(underline2);
+            runProperties2.Append(fontSize4);
+            runProperties2.Append(color4);
+            runProperties2.Append(runFont2);
+            runProperties2.Append(fontFamily2);
+            runProperties2.Append(fontScheme5);
+            Text text2 = new Text() { Space = SpaceProcessingModeValues.Preserve };
+            text2.Text = "Directive Boards";
+
+            run2.Append(runProperties2);
+            run2.Append(text2);
+
+            sharedStringItem1.Append(run1);
+            sharedStringItem1.Append(run2);
+
+            sharedStringTable1.Append(sharedStringItem1);
+
+            sharedStringTablePart1.SharedStringTable = sharedStringTable1;
+        }
+
+        // Generates content of sharedStringTablePart1.
+        private static void GenerateSharedStringTablePart1Content_Simple(SharedStringTablePart sharedStringTablePart1)
+        {
+            SharedStringTable sharedStringTable1 = new SharedStringTable() { Count = (UInt32Value)1U, UniqueCount = (UInt32Value)1U };
+
+            SharedStringItem sharedStringItem1 = new SharedStringItem();
             Text text1 = new Text();
             text1.Text = "Directive Boards";
 
