@@ -30,7 +30,7 @@ namespace Sandbox.OpenXML
             WorksheetPart worksheetPart1 = workbookPart1.AddNewPart<WorksheetPart>("rId1");
             GenerateWorksheetPart1Content(worksheetPart1);
 
-            worksheetPart1.AddHyperlinkRelationship(new System.Uri("https://directiveboards.azurewebsites.net/", System.UriKind.Absolute), true, "rId1");
+            worksheetPart1.AddHyperlinkRelationship(new System.Uri("https://directiveboards.azurewebsites.net/", System.UriKind.Absolute), true, "dbLink");
             SharedStringTablePart sharedStringTablePart1 = workbookPart1.AddNewPart<SharedStringTablePart>("rId4");
             GenerateSharedStringTablePart1Content(sharedStringTablePart1);
         }
@@ -201,7 +201,7 @@ namespace Sandbox.OpenXML
             sheetData1.Append(row1);
 
             Hyperlinks hyperlinks1 = new Hyperlinks();
-            Hyperlink hyperlink2 = new Hyperlink() { Reference = "A1", Id = "rId1" };
+            Hyperlink hyperlink2 = new Hyperlink() { Reference = "A1", Id = "dbLink" };
 
             hyperlinks1.Append(hyperlink2);
             worksheet1.Append(columns1);
