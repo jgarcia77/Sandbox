@@ -50,7 +50,9 @@
       "DocumentFormat.OpenXml >= 2.5.0",
       "WindowsBase >= 4.6.1055"
     ],
-    ".NETFramework,Version=v4.6.1": []
+    ".NETFramework,Version=v4.6.1": [
+      "System.Xml >= 4.0.0"
+    ]
   },
   "tools": {},
   "projectFileToolGroups": {}
