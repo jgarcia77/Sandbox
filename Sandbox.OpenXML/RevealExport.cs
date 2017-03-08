@@ -29,10 +29,12 @@ namespace Sandbox.OpenXML
         // Adds child parts and generates content of the specified part.
         private void CreateParts(SpreadsheetDocument document)
         {
-            WorkbookPart workbookPart1 = document.AddWorkbookPart();
-            GenerateWorkbookPart1Content(workbookPart1);
+            var totalReports = 1;
 
-            for (var i = 1; i <= 1; i++)
+            WorkbookPart workbookPart1 = document.AddWorkbookPart();
+            GenerateWorkbookPart1Content(workbookPart1, totalReports);
+
+            for (var i = 1; i <= totalReports; i++)
             {
                 var worksheets = new AnalysisWorksheets(i);
 
@@ -50,7 +52,7 @@ namespace Sandbox.OpenXML
         }
         
         // Generates content of workbookPart1.
-        private void GenerateWorkbookPart1Content(WorkbookPart workbookPart1)
+        private void GenerateWorkbookPart1Content(WorkbookPart workbookPart1, int totalReports)
         {
             Workbook workbook1 = new Workbook() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "x15" } };
             workbook1.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
@@ -77,13 +79,18 @@ namespace Sandbox.OpenXML
             bookViews1.Append(workbookView1);
 
             Sheets sheets1 = new Sheets();
-            Sheet sheet1 = new Sheet() { Name = "Overview", SheetId = (UInt32Value)2U, Id = "rId1" };
-            Sheet sheet2 = new Sheet() { Name = "Data Model", SheetId = (UInt32Value)3U, Id = "rId2" };
-            Sheet sheet3 = new Sheet() { Name = "Results Report", SheetId = (UInt32Value)1U, Id = "rId3" };
 
-            sheets1.Append(sheet1);
-            sheets1.Append(sheet2);
-            sheets1.Append(sheet3);
+            for (var i = 1; i <= totalReports; i++)
+            {
+                Sheet sheet1 = new Sheet() { Name = string.Concat("Overview", totalReports == 1 ? string.Empty: i.ToString()), SheetId = (UInt32Value)2U, Id = string.Concat("Sequence", i, "_rId1") };
+                Sheet sheet2 = new Sheet() { Name = string.Concat("Data Model", totalReports == 1 ? string.Empty: i.ToString()), SheetId = (UInt32Value)3U, Id = string.Concat("Sequence", i, "_rId2") };
+                Sheet sheet3 = new Sheet() { Name = string.Concat("Results Report", totalReports == 1 ? string.Empty: i.ToString()), SheetId = (UInt32Value)1U, Id = string.Concat("Sequence", i, "_rId3") };
+
+                sheets1.Append(sheet1);
+                sheets1.Append(sheet2);
+                sheets1.Append(sheet3);
+            }
+            
             CalculationProperties calculationProperties1 = new CalculationProperties() { CalculationId = (UInt32Value)150000U, CalculationOnSave = false };
 
             WorkbookExtensionList workbookExtensionList1 = new WorkbookExtensionList();
@@ -107,25 +114,7 @@ namespace Sandbox.OpenXML
 
             workbookPart1.Workbook = workbook1;
         }
-        
-        // Generates content of spreadsheetPrinterSettingsPart1.
-        private void GenerateSpreadsheetPrinterSettingsPart1Content(SpreadsheetPrinterSettingsPart spreadsheetPrinterSettingsPart1)
-        {
-            System.IO.Stream data = GetBinaryDataStream(spreadsheetPrinterSettingsPart1Data);
-            spreadsheetPrinterSettingsPart1.FeedData(data);
-            data.Close();
-        }
-
-        
-        // Generates content of spreadsheetPrinterSettingsPart2.
-        private void GenerateSpreadsheetPrinterSettingsPart2Content(SpreadsheetPrinterSettingsPart spreadsheetPrinterSettingsPart2)
-        {
-            System.IO.Stream data = GetBinaryDataStream(spreadsheetPrinterSettingsPart2Data);
-            spreadsheetPrinterSettingsPart2.FeedData(data);
-            data.Close();
-        }
-
-        
+         
         // Generates content of sharedStringTablePart1.
         private void GenerateSharedStringTablePart1Content(SharedStringTablePart sharedStringTablePart1)
         {
@@ -4380,19 +4369,5 @@ namespace Sandbox.OpenXML
 
             themePart1.Theme = theme1;
         }
-
-        #region Binary Data
-        
-        private string spreadsheetPrinterSettingsPart1Data = "UwBuAGEAZwBpAHQAIAAxADMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEEAwbcAAwDQ++ABQEAAQDqCm8IZAABAA8AyAACAAEAyAACAAEATABlAHQAdABlAHIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAgAAAAEAAAD/////AAAAAAAAAAAAAAAAAAAAAERJTlUiALAADAMAAMGVHPsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAEAAAAAAAAAAgABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAU01USgAAAAAQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==";
-
-        private string spreadsheetPrinterSettingsPart2Data = "UwBuAGEAZwBpAHQAIAAxADMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEEAwbcAAwDQ++ABQEAAQDqCm8IZAABAA8AyAACAAEAyAACAAEATABlAHQAdABlAHIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAgAAAAEAAAD/////AAAAAAAAAAAAAAAAAAAAAERJTlUiALAADAMAAMGVHPsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABgAAAAEAAAAAAAAAAgABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACwAAAAU01USgAAAAAQAKAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==";
-
-        private System.IO.Stream GetBinaryDataStream(string base64String)
-        {
-            return new System.IO.MemoryStream(System.Convert.FromBase64String(base64String));
-        }
-
-        #endregion
-
     }
 }

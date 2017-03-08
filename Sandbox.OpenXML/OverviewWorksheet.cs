@@ -21,22 +21,22 @@ namespace Sandbox.OpenXML
 
         public void AppendTo(WorkbookPart workbookPart, ImagePart imagePart)
         {
-            WorksheetPart worksheetPart3 = workbookPart.AddNewPart<WorksheetPart>("rId1");
-            GenerateWorksheetPart3Content(worksheetPart3);
+            WorksheetPart worksheetPart = workbookPart.AddNewPart<WorksheetPart>(string.Concat("Sequence", Sequence, "_rId1"));
+            GenerateWorksheetPartContent(worksheetPart);
 
-            DrawingsPart drawingsPart3 = worksheetPart3.AddNewPart<DrawingsPart>("rId1");
-            GenerateDrawingsPart3Content(drawingsPart3);
+            DrawingsPart drawingsPart = worksheetPart.AddNewPart<DrawingsPart>("rId1");
+            GenerateDrawingsPartContent(drawingsPart);
 
-            drawingsPart3.AddPart(imagePart, "rId1");
+            drawingsPart.AddPart(imagePart, "rId1");
         }
 
         // Generates content of worksheetPart3.
-        private void GenerateWorksheetPart3Content(WorksheetPart worksheetPart3)
+        private void GenerateWorksheetPartContent(WorksheetPart worksheetPart)
         {
-            Worksheet worksheet3 = new Worksheet() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "x14ac" } };
-            worksheet3.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
-            worksheet3.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
-            worksheet3.AddNamespaceDeclaration("x14ac", "http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac");
+            Worksheet worksheet = new Worksheet() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "x14ac" } };
+            worksheet.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
+            worksheet.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
+            worksheet.AddNamespaceDeclaration("x14ac", "http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac");
             SheetDimension sheetDimension3 = new SheetDimension() { Reference = "A1:J78" };
 
             SheetViews sheetViews3 = new SheetViews();
@@ -2509,28 +2509,28 @@ namespace Sandbox.OpenXML
             columnBreaks3.Append(break3);
             Drawing drawing3 = new Drawing() { Id = "rId1" };
 
-            worksheet3.Append(sheetDimension3);
-            worksheet3.Append(sheetViews3);
-            worksheet3.Append(sheetFormatProperties3);
-            worksheet3.Append(columns3);
-            worksheet3.Append(sheetData3);
-            worksheet3.Append(mergeCells3);
-            worksheet3.Append(phoneticProperties3);
-            worksheet3.Append(hyperlinks1);
-            worksheet3.Append(pageMargins3);
-            worksheet3.Append(pageSetup3);
-            worksheet3.Append(columnBreaks3);
-            worksheet3.Append(drawing3);
+            worksheet.Append(sheetDimension3);
+            worksheet.Append(sheetViews3);
+            worksheet.Append(sheetFormatProperties3);
+            worksheet.Append(columns3);
+            worksheet.Append(sheetData3);
+            worksheet.Append(mergeCells3);
+            worksheet.Append(phoneticProperties3);
+            worksheet.Append(hyperlinks1);
+            worksheet.Append(pageMargins3);
+            worksheet.Append(pageSetup3);
+            worksheet.Append(columnBreaks3);
+            worksheet.Append(drawing3);
 
-            worksheetPart3.Worksheet = worksheet3;
+            worksheetPart.Worksheet = worksheet;
         }
 
         // Generates content of drawingsPart3.
-        private void GenerateDrawingsPart3Content(DrawingsPart drawingsPart3)
+        private void GenerateDrawingsPartContent(DrawingsPart drawingsPart)
         {
-            Xdr.WorksheetDrawing worksheetDrawing3 = new Xdr.WorksheetDrawing();
-            worksheetDrawing3.AddNamespaceDeclaration("xdr", "http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing");
-            worksheetDrawing3.AddNamespaceDeclaration("a", "http://schemas.openxmlformats.org/drawingml/2006/main");
+            Xdr.WorksheetDrawing worksheetDrawing = new Xdr.WorksheetDrawing();
+            worksheetDrawing.AddNamespaceDeclaration("xdr", "http://schemas.openxmlformats.org/drawingml/2006/spreadsheetDrawing");
+            worksheetDrawing.AddNamespaceDeclaration("a", "http://schemas.openxmlformats.org/drawingml/2006/main");
 
             Xdr.TwoCellAnchor twoCellAnchor7 = new Xdr.TwoCellAnchor() { EditAs = Xdr.EditAsValues.OneCell };
 
@@ -2753,10 +2753,10 @@ namespace Sandbox.OpenXML
             twoCellAnchor8.Append(shape4);
             twoCellAnchor8.Append(clientData8);
 
-            worksheetDrawing3.Append(twoCellAnchor7);
-            worksheetDrawing3.Append(twoCellAnchor8);
+            worksheetDrawing.Append(twoCellAnchor7);
+            worksheetDrawing.Append(twoCellAnchor8);
 
-            drawingsPart3.WorksheetDrawing = worksheetDrawing3;
+            drawingsPart.WorksheetDrawing = worksheetDrawing;
         }
     }
 }

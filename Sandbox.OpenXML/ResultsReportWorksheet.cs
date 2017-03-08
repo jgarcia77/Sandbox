@@ -24,7 +24,7 @@ namespace Sandbox.OpenXML
 
         public void AppendTo(WorkbookPart workbookPart)
         {
-            WorksheetPart = workbookPart.AddNewPart<WorksheetPart>("rId3");
+            WorksheetPart = workbookPart.AddNewPart<WorksheetPart>(string.Concat("Sequence", Sequence, "_rId3"));
             GenerateWorksheetPartContent(WorksheetPart);
 
             DrawingsPart = WorksheetPart.AddNewPart<DrawingsPart>("rId2");
