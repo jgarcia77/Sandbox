@@ -20,7 +20,7 @@
 
         private static void DStarExport(string directory)
         {
-            var export = new GeneratedClass();
+            var export = new RevealExport();
 
             export.CreatePackage(Path.Combine(directory, "DStarExport.xlsx"));
         }
