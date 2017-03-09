@@ -1325,7 +1325,7 @@ namespace Sandbox.OpenXML
             Cell cell1276 = new Cell() { CellReference = "E46", StyleIndex = (UInt32Value)133U };
             Cell cell1277 = new Cell() { CellReference = "F46", StyleIndex = (UInt32Value)133U };
 
-            //TODO: Loop to display all predicting variables
+            // TODO: Loop to display all predicting variables
             Cell cell1278 = new Cell() { CellReference = "G46", StyleIndex = (UInt32Value)133U, DataType = CellValues.String };
             CellValue cellValue319 = new CellValue();
             cellValue319.Text = "Cos Passengers X&1";
@@ -1344,6 +1344,8 @@ namespace Sandbox.OpenXML
             row132.Append(cell1279);
             row132.Append(cell1280);
 
+            // TODO: Loop to diaplay all rows in the table
+            #region Table
             Row row133 = new Row() { RowIndex = (UInt32Value)47U, Spans = new ListValue<StringValue>() { InnerText = "1:10" }, Height = 18.5D };
             Cell cell1281 = new Cell() { CellReference = "A47", StyleIndex = (UInt32Value)2U };
 
@@ -2639,13 +2641,14 @@ namespace Sandbox.OpenXML
             row168.Append(cell1602);
             row168.Append(cell1603);
             row168.Append(cell1604);
+            #endregion
 
             Row row169 = new Row() { RowIndex = (UInt32Value)83U, Spans = new ListValue<StringValue>() { InnerText = "1:9" }, Height = 18.5D };
             Cell cell1605 = new Cell() { CellReference = "A83", StyleIndex = (UInt32Value)2U };
 
-            Cell cell1606 = new Cell() { CellReference = "B83", StyleIndex = (UInt32Value)69U, DataType = CellValues.SharedString };
+            Cell cell1606 = new Cell() { CellReference = "B83", StyleIndex = (UInt32Value)69U, DataType = CellValues.String };
             CellValue cellValue428 = new CellValue();
-            cellValue428.Text = "27";
+            cellValue428.Text = "Total";
 
             cell1606.Append(cellValue428);
             Cell cell1607 = new Cell() { CellReference = "C83", StyleIndex = (UInt32Value)57U };
@@ -2721,9 +2724,9 @@ namespace Sandbox.OpenXML
             Row row172 = new Row() { RowIndex = (UInt32Value)86U, Spans = new ListValue<StringValue>() { InnerText = "1:9" }, Height = 19D, ThickTop = true };
             Cell cell1632 = new Cell() { CellReference = "A86", StyleIndex = (UInt32Value)2U };
 
-            Cell cell1633 = new Cell() { CellReference = "B86", StyleIndex = (UInt32Value)86U, DataType = CellValues.SharedString };
+            Cell cell1633 = new Cell() { CellReference = "B86", StyleIndex = (UInt32Value)86U, DataType = CellValues.String };
             CellValue cellValue431 = new CellValue();
-            cellValue431.Text = "124";
+            cellValue431.Text = "Timeline and Scatter Plots";
 
             cell1633.Append(cellValue431);
             Cell cell1634 = new Cell() { CellReference = "C86", StyleIndex = (UInt32Value)21U };
