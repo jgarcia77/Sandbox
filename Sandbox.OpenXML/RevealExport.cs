@@ -18,7 +18,7 @@ namespace Sandbox.OpenXML
                 
         private void CreateParts(SpreadsheetDocument document)
         {
-            var totalReports = 2;
+            var totalReports = 1;
 
             WorkbookPart workbookPart = document.AddWorkbookPart();
             GenerateWorkbookPartContent(workbookPart, totalReports);

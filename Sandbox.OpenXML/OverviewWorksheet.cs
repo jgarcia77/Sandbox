@@ -2332,9 +2332,9 @@ namespace Sandbox.OpenXML
             Row row280 = new Row() { RowIndex = (UInt32Value)72U, Spans = new ListValue<StringValue>() { InnerText = "1:10" }, Height = 26D };
             Cell cell2679 = new Cell() { CellReference = "A72", StyleIndex = (UInt32Value)2U };
 
-            Cell cell2680 = new Cell() { CellReference = "B72", StyleIndex = (UInt32Value)111U, DataType = CellValues.SharedString };
+            Cell cell2680 = new Cell() { CellReference = "B72", StyleIndex = (UInt32Value)111U, DataType = CellValues.String };
             CellValue cellValue509 = new CellValue();
-            cellValue509.Text = "77";
+            cellValue509.Text = "4 File Maintenance";
 
             cell2680.Append(cellValue509);
             Cell cell2681 = new Cell() { CellReference = "C72", StyleIndex = (UInt32Value)112U };
@@ -2360,9 +2360,9 @@ namespace Sandbox.OpenXML
             Row row281 = new Row() { RowIndex = (UInt32Value)73U, Spans = new ListValue<StringValue>() { InnerText = "1:10" }, Height = 53D, CustomHeight = true };
             Cell cell2689 = new Cell() { CellReference = "A73", StyleIndex = (UInt32Value)2U };
 
-            Cell cell2690 = new Cell() { CellReference = "B73", StyleIndex = (UInt32Value)119U, DataType = CellValues.SharedString };
+            Cell cell2690 = new Cell() { CellReference = "B73", StyleIndex = (UInt32Value)119U, DataType = CellValues.String };
             CellValue cellValue510 = new CellValue();
-            cellValue510.Text = "78";
+            cellValue510.Text = "a)  To help in the successful running of the application in future years, make corrections to the data profile now (e.g., by removing or quantifying unusual and non-repeating events) so that the data remains a good predictor of the test variable for future years.  Document the reasons for any such changes.  ";
 
             cell2690.Append(cellValue510);
             Cell cell2691 = new Cell() { CellReference = "C73", StyleIndex = (UInt32Value)120U };
@@ -2388,9 +2388,9 @@ namespace Sandbox.OpenXML
             Row row282 = new Row() { RowIndex = (UInt32Value)74U, Spans = new ListValue<StringValue>() { InnerText = "1:10" }, Height = 60D, CustomHeight = true, ThickBot = true };
             Cell cell2699 = new Cell() { CellReference = "A74", StyleIndex = (UInt32Value)2U };
 
-            Cell cell2700 = new Cell() { CellReference = "B74", StyleIndex = (UInt32Value)117U, DataType = CellValues.SharedString };
+            Cell cell2700 = new Cell() { CellReference = "B74", StyleIndex = (UInt32Value)117U, DataType = CellValues.String };
             CellValue cellValue511 = new CellValue();
-            cellValue511.Text = "39";
+            cellValue511.Text = "Comments:";
 
             cell2700.Append(cellValue511);
             Cell cell2701 = new Cell() { CellReference = "C74", StyleIndex = (UInt32Value)118U };
@@ -2400,9 +2400,9 @@ namespace Sandbox.OpenXML
             Cell cell2705 = new Cell() { CellReference = "G74", StyleIndex = (UInt32Value)28U };
             Cell cell2706 = new Cell() { CellReference = "H74", StyleIndex = (UInt32Value)28U };
 
-            Cell cell2707 = new Cell() { CellReference = "I74", StyleIndex = (UInt32Value)29U, DataType = CellValues.SharedString };
+            Cell cell2707 = new Cell() { CellReference = "I74", StyleIndex = (UInt32Value)29U, DataType = CellValues.String };
             CellValue cellValue512 = new CellValue();
-            cellValue512.Text = "37";
+            cellValue512.Text = "See Data Model Sheet";
 
             cell2707.Append(cellValue512);
             Cell cell2708 = new Cell() { CellReference = "J74", StyleIndex = (UInt32Value)2U };
