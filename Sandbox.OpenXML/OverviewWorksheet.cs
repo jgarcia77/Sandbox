@@ -147,17 +147,17 @@ namespace Sandbox.OpenXML
             Row row213 = new Row() { RowIndex = (UInt32Value)5U, Spans = new ListValue<StringValue>() { InnerText = "1:10" }, Height = 26D };
             Cell cell2009 = new Cell() { CellReference = "A5", StyleIndex = (UInt32Value)2U };
 
-            Cell cell2010 = new Cell() { CellReference = "B5", StyleIndex = (UInt32Value)96U, DataType = CellValues.SharedString };
+            Cell cell2010 = new Cell() { CellReference = "B5", StyleIndex = (UInt32Value)96U, DataType = CellValues.String };
             CellValue cellValue432 = new CellValue();
-            cellValue432.Text = "28";
+            cellValue432.Text = "Engagement Name";
 
             cell2010.Append(cellValue432);
             Cell cell2011 = new Cell() { CellReference = "C5", StyleIndex = (UInt32Value)97U };
             Cell cell2012 = new Cell() { CellReference = "D5", StyleIndex = (UInt32Value)98U };
 
-            Cell cell2013 = new Cell() { CellReference = "E5", StyleIndex = (UInt32Value)105U, DataType = CellValues.SharedString };
+            Cell cell2013 = new Cell() { CellReference = "E5", StyleIndex = (UInt32Value)105U, DataType = CellValues.String };
             CellValue cellValue433 = new CellValue();
-            cellValue433.Text = "32";
+            cellValue433.Text = "Dr Pepper Snapple Group, Inc.";
 
             cell2013.Append(cellValue433);
             Cell cell2014 = new Cell() { CellReference = "F5", StyleIndex = (UInt32Value)106U };
@@ -180,17 +180,17 @@ namespace Sandbox.OpenXML
             Row row214 = new Row() { RowIndex = (UInt32Value)6U, Spans = new ListValue<StringValue>() { InnerText = "1:10" }, Height = 26D };
             Cell cell2019 = new Cell() { CellReference = "A6", StyleIndex = (UInt32Value)2U };
 
-            Cell cell2020 = new Cell() { CellReference = "B6", StyleIndex = (UInt32Value)99U, DataType = CellValues.SharedString };
+            Cell cell2020 = new Cell() { CellReference = "B6", StyleIndex = (UInt32Value)99U, DataType = CellValues.String };
             CellValue cellValue434 = new CellValue();
-            cellValue434.Text = "29";
+            cellValue434.Text = "File Name";
 
             cell2020.Append(cellValue434);
             Cell cell2021 = new Cell() { CellReference = "C6", StyleIndex = (UInt32Value)100U };
             Cell cell2022 = new Cell() { CellReference = "D6", StyleIndex = (UInt32Value)101U };
 
-            Cell cell2023 = new Cell() { CellReference = "E6", StyleIndex = (UInt32Value)19U, DataType = CellValues.SharedString };
+            Cell cell2023 = new Cell() { CellReference = "E6", StyleIndex = (UInt32Value)19U, DataType = CellValues.String };
             CellValue cellValue435 = new CellValue();
-            cellValue435.Text = "33";
+            cellValue435.Text = "Reveal Demo1.xlsx";
 
             cell2023.Append(cellValue435);
             Cell cell2024 = new Cell() { CellReference = "F6", StyleIndex = (UInt32Value)26U };
@@ -213,17 +213,17 @@ namespace Sandbox.OpenXML
             Row row215 = new Row() { RowIndex = (UInt32Value)7U, Spans = new ListValue<StringValue>() { InnerText = "1:10" }, Height = 26D };
             Cell cell2029 = new Cell() { CellReference = "A7", StyleIndex = (UInt32Value)2U };
 
-            Cell cell2030 = new Cell() { CellReference = "B7", StyleIndex = (UInt32Value)99U, DataType = CellValues.SharedString };
+            Cell cell2030 = new Cell() { CellReference = "B7", StyleIndex = (UInt32Value)99U, DataType = CellValues.String };
             CellValue cellValue436 = new CellValue();
-            cellValue436.Text = "30";
+            cellValue436.Text = "Description";
 
             cell2030.Append(cellValue436);
             Cell cell2031 = new Cell() { CellReference = "C7", StyleIndex = (UInt32Value)100U };
             Cell cell2032 = new Cell() { CellReference = "D7", StyleIndex = (UInt32Value)101U };
 
-            Cell cell2033 = new Cell() { CellReference = "E7", StyleIndex = (UInt32Value)19U, DataType = CellValues.SharedString };
+            Cell cell2033 = new Cell() { CellReference = "E7", StyleIndex = (UInt32Value)19U, DataType = CellValues.String };
             CellValue cellValue437 = new CellValue();
-            cellValue437.Text = "34";
+            cellValue437.Text = "Changed risk values to significant";
 
             cell2033.Append(cellValue437);
             Cell cell2034 = new Cell() { CellReference = "F7", StyleIndex = (UInt32Value)26U };
@@ -246,17 +246,17 @@ namespace Sandbox.OpenXML
             Row row216 = new Row() { RowIndex = (UInt32Value)8U, Spans = new ListValue<StringValue>() { InnerText = "1:10" }, Height = 26.5D, ThickBot = true };
             Cell cell2039 = new Cell() { CellReference = "A8", StyleIndex = (UInt32Value)2U };
 
-            Cell cell2040 = new Cell() { CellReference = "B8", StyleIndex = (UInt32Value)102U, DataType = CellValues.SharedString };
+            Cell cell2040 = new Cell() { CellReference = "B8", StyleIndex = (UInt32Value)102U, DataType = CellValues.String };
             CellValue cellValue438 = new CellValue();
-            cellValue438.Text = "31";
+            cellValue438.Text = "Date and Time";
 
             cell2040.Append(cellValue438);
             Cell cell2041 = new Cell() { CellReference = "C8", StyleIndex = (UInt32Value)103U };
             Cell cell2042 = new Cell() { CellReference = "D8", StyleIndex = (UInt32Value)104U };
 
-            Cell cell2043 = new Cell() { CellReference = "E8", StyleIndex = (UInt32Value)114U };
+            Cell cell2043 = new Cell() { CellReference = "E8", StyleIndex = (UInt32Value)114U, DataType = CellValues.String };
             CellValue cellValue439 = new CellValue();
-            cellValue439.Text = "42772.804861111108";
+            cellValue439.Text = "2/6/2017  7:19:00 PM EST";
 
             cell2043.Append(cellValue439);
             Cell cell2044 = new Cell() { CellReference = "F8", StyleIndex = (UInt32Value)115U };
@@ -302,11 +302,102 @@ namespace Sandbox.OpenXML
             Row row218 = new Row() { RowIndex = (UInt32Value)10U, Spans = new ListValue<StringValue>() { InnerText = "1:10" }, Height = 30D, CustomHeight = true };
             Cell cell2059 = new Cell() { CellReference = "A10", StyleIndex = (UInt32Value)2U };
 
-            Cell cell2060 = new Cell() { CellReference = "B10", StyleIndex = (UInt32Value)90U, DataType = CellValues.SharedString };
-            CellValue cellValue440 = new CellValue();
-            cellValue440.Text = "119";
+            var inlineString2060 = new InlineString();
 
-            cell2060.Append(cellValue440);
+            Run run19 = new Run();
+
+            RunProperties runProperties19 = new RunProperties();
+            Bold bold8 = new Bold();
+            FontSize fontSize15 = new FontSize() { Val = 20D };
+            Color color15 = new Color() { Theme = (UInt32Value)1U };
+            RunFont runFont15 = new RunFont() { Val = "Calibri" };
+            FontFamily fontFamily15 = new FontFamily() { Val = 2 };
+            FontScheme fontScheme15 = new FontScheme() { Val = FontSchemeValues.Minor };
+
+            runProperties19.Append(bold8);
+            runProperties19.Append(fontSize15);
+            runProperties19.Append(color15);
+            runProperties19.Append(runFont15);
+            runProperties19.Append(fontFamily15);
+            runProperties19.Append(fontScheme15);
+            Text text131 = new Text();
+            text131.Text = "Steps to Performing Substantive Analytical procedures using Reveal";
+
+            run19.Append(runProperties19);
+            run19.Append(text131);
+
+            inlineString2060.Append(run19);
+
+            Run run20 = new Run();
+
+            RunProperties runProperties20 = new RunProperties();
+            FontSize fontSize16 = new FontSize() { Val = 12D };
+            Color color16 = new Color() { Theme = (UInt32Value)1U };
+            RunFont runFont16 = new RunFont() { Val = "Calibri" };
+            FontFamily fontFamily16 = new FontFamily() { Val = 2 };
+            FontScheme fontScheme16 = new FontScheme() { Val = FontSchemeValues.Minor };
+
+            runProperties20.Append(fontSize16);
+            runProperties20.Append(color16);
+            runProperties20.Append(runFont16);
+            runProperties20.Append(fontFamily16);
+            runProperties20.Append(fontScheme16);
+            Text text132 = new Text() { Space = SpaceProcessingModeValues.Preserve };
+            text132.Text = "\n\n";
+
+            run20.Append(runProperties20);
+            run20.Append(text132);
+
+            inlineString2060.Append(run20);
+
+            Run run21 = new Run();
+
+            RunProperties runProperties21 = new RunProperties();
+            Bold bold9 = new Bold();
+            FontSize fontSize17 = new FontSize() { Val = 12D };
+            Color color17 = new Color() { Theme = (UInt32Value)1U };
+            RunFont runFont17 = new RunFont() { Val = "Calibri" };
+            FontFamily fontFamily17 = new FontFamily() { Val = 2 };
+            FontScheme fontScheme17 = new FontScheme() { Val = FontSchemeValues.Minor };
+
+            runProperties21.Append(bold9);
+            runProperties21.Append(fontSize17);
+            runProperties21.Append(color17);
+            runProperties21.Append(runFont17);
+            runProperties21.Append(fontFamily17);
+            runProperties21.Append(fontScheme17);
+            Text text133 = new Text();
+            text133.Text = "Note";
+
+            run21.Append(runProperties21);
+            run21.Append(text133);
+
+            inlineString2060.Append(run21);
+
+            Run run22 = new Run();
+
+            RunProperties runProperties22 = new RunProperties();
+            FontSize fontSize18 = new FontSize() { Val = 12D };
+            Color color18 = new Color() { Theme = (UInt32Value)1U };
+            RunFont runFont18 = new RunFont() { Val = "Calibri" };
+            FontFamily fontFamily18 = new FontFamily() { Val = 2 };
+            FontScheme fontScheme18 = new FontScheme() { Val = FontSchemeValues.Minor };
+
+            runProperties22.Append(fontSize18);
+            runProperties22.Append(color18);
+            runProperties22.Append(runFont18);
+            runProperties22.Append(fontFamily18);
+            runProperties22.Append(fontScheme18);
+            Text text134 = new Text();
+            text134.Text = ":  For additional guidance regarding the use of Reveal, refer to the Performing Substantive Analytical Procedures guide available in the Deloitte Technical Library.";
+
+            run22.Append(runProperties22);
+            run22.Append(text134);
+
+            inlineString2060.Append(run22);
+
+            Cell cell2060 = new Cell(inlineString2060) { CellReference = "B10", StyleIndex = (UInt32Value)90U, DataType = CellValues.InlineString };
+            
             Cell cell2061 = new Cell() { CellReference = "C10", StyleIndex = (UInt32Value)91U };
             Cell cell2062 = new Cell() { CellReference = "D10", StyleIndex = (UInt32Value)91U };
             Cell cell2063 = new Cell() { CellReference = "E10", StyleIndex = (UInt32Value)91U };
