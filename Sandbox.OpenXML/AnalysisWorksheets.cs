@@ -8,9 +8,9 @@ namespace Sandbox.OpenXML
         private DataModelWorksheet _dataModelWorksheet;
         private ResultsReportWorksheet _resultsReportWorksheet;
 
-        public AnalysisWorksheets(int sequence)
+        public AnalysisWorksheets(int sequence, bool multipleReports)
         {
-            _overviewWorksheet = new OverviewWorksheet(sequence);
+            _overviewWorksheet = new OverviewWorksheet(sequence, multipleReports);
             _dataModelWorksheet = new DataModelWorksheet(sequence);
             _resultsReportWorksheet = new ResultsReportWorksheet(sequence);
         }

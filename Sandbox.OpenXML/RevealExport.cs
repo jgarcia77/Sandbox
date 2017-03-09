@@ -18,14 +18,14 @@ namespace Sandbox.OpenXML
                 
         private void CreateParts(SpreadsheetDocument document)
         {
-            var totalReports = 1;
+            var totalReports = 2;
 
             WorkbookPart workbookPart = document.AddWorkbookPart();
             GenerateWorkbookPartContent(workbookPart, totalReports);
 
             for (var i = 1; i <= totalReports; i++)
             {
-                var worksheets = new AnalysisWorksheets(i);
+                var worksheets = new AnalysisWorksheets(i, totalReports > 1);
 
                 worksheets.AppendTo(workbookPart);
             }

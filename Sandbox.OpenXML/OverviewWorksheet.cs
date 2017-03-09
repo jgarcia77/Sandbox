@@ -9,9 +9,11 @@ namespace Sandbox.OpenXML
     public class OverviewWorksheet
     {
         public int Sequence { get; private set; }
-        public OverviewWorksheet(int sequence)
+        public bool MultipleReports { get; private set; }
+        public OverviewWorksheet(int sequence, bool multipleReports)
         {
             Sequence = sequence;
+            MultipleReports = multipleReports;
         }
 
         public void AppendTo(WorkbookPart workbookPart, ImagePart imagePart)
@@ -2560,21 +2562,26 @@ namespace Sandbox.OpenXML
             PhoneticProperties phoneticProperties3 = new PhoneticProperties() { FontId = (UInt32Value)3U, Type = PhoneticValues.NoConversion };
 
             Hyperlinks hyperlinks1 = new Hyperlinks();
-            Hyperlink hyperlink1 = new Hyperlink() { Reference = "I23", Location = "\'Data Model\'!A1", Display = "See Data Model Sheet" };
-            Hyperlink hyperlink2 = new Hyperlink() { Reference = "I18", Location = "\'Data Model\'!A1", Display = "See Data Model Sheet" };
-            Hyperlink hyperlink3 = new Hyperlink() { Reference = "I21", Location = "\'Data Model\'!A1", Display = "See Data Model Sheet" };
-            Hyperlink hyperlink4 = new Hyperlink() { Reference = "I34", Location = "\'Data Model\'!A1", Display = "See Data Model Sheet" };
-            Hyperlink hyperlink5 = new Hyperlink() { Reference = "I51", Location = "\'Data Model\'!A1", Display = "See Data Model Sheet" };
-            Hyperlink hyperlink6 = new Hyperlink() { Reference = "I43", Location = "\'Data Model\'!A1", Display = "See Data Model Sheet" };
-            Hyperlink hyperlink7 = new Hyperlink() { Reference = "I49", Location = "\'Data Model\'!A1", Display = "See Data Model Sheet" };
-            Hyperlink hyperlink8 = new Hyperlink() { Reference = "I53", Location = "\'Results Report\'!A1", Display = "See Data Model Sheet" };
-            Hyperlink hyperlink9 = new Hyperlink() { Reference = "I57", Location = "\'Data Model\'!A1", Display = "See Data Model Sheet" };
-            Hyperlink hyperlink10 = new Hyperlink() { Reference = "I55", Location = "\'Results Report\'!A1", Display = "See Data Model Sheet" };
-            Hyperlink hyperlink11 = new Hyperlink() { Reference = "I61", Location = "\'Results Report\'!A1", Display = "See Data Model Sheet" };
-            Hyperlink hyperlink12 = new Hyperlink() { Reference = "I63", Location = "\'Results Report\'!A1", Display = "See Data Model Sheet" };
-            Hyperlink hyperlink13 = new Hyperlink() { Reference = "I66", Location = "\'Results Report\'!A1", Display = "See Data Model Sheet" };
-            Hyperlink hyperlink14 = new Hyperlink() { Reference = "I70", Location = "\'Results Report\'!A1", Display = "See Data Model Sheet" };
-            Hyperlink hyperlink15 = new Hyperlink() { Reference = "I74", Location = "\'Data Model\'!A1", Display = "See Data Model Sheet" };
+
+            var dataModelLocation = string.Concat("\'Data Model", MultipleReports ? Sequence.ToString() : string.Empty, "\'!A1");
+
+            var resultReportLocation = string.Concat("\'Results Report", MultipleReports ? Sequence.ToString() : string.Empty, "\'!A1");
+
+            Hyperlink hyperlink1 = new Hyperlink() { Reference = "I23", Location = dataModelLocation, Display = "See Data Model Sheet" };
+            Hyperlink hyperlink2 = new Hyperlink() { Reference = "I18", Location = dataModelLocation, Display = "See Data Model Sheet" };
+            Hyperlink hyperlink3 = new Hyperlink() { Reference = "I21", Location = dataModelLocation, Display = "See Data Model Sheet" };
+            Hyperlink hyperlink4 = new Hyperlink() { Reference = "I34", Location = dataModelLocation, Display = "See Data Model Sheet" };
+            Hyperlink hyperlink5 = new Hyperlink() { Reference = "I51", Location = dataModelLocation, Display = "See Data Model Sheet" };
+            Hyperlink hyperlink6 = new Hyperlink() { Reference = "I43", Location = dataModelLocation, Display = "See Data Model Sheet" };
+            Hyperlink hyperlink7 = new Hyperlink() { Reference = "I49", Location = dataModelLocation, Display = "See Data Model Sheet" };
+            Hyperlink hyperlink8 = new Hyperlink() { Reference = "I53", Location = resultReportLocation, Display = "See Data Model Sheet" };
+            Hyperlink hyperlink9 = new Hyperlink() { Reference = "I57", Location = dataModelLocation, Display = "See Data Model Sheet" };
+            Hyperlink hyperlink10 = new Hyperlink() { Reference = "I55", Location = resultReportLocation, Display = "See Data Model Sheet" };
+            Hyperlink hyperlink11 = new Hyperlink() { Reference = "I61", Location = resultReportLocation, Display = "See Data Model Sheet" };
+            Hyperlink hyperlink12 = new Hyperlink() { Reference = "I63", Location = resultReportLocation, Display = "See Data Model Sheet" };
+            Hyperlink hyperlink13 = new Hyperlink() { Reference = "I66", Location = resultReportLocation, Display = "See Data Model Sheet" };
+            Hyperlink hyperlink14 = new Hyperlink() { Reference = "I70", Location = resultReportLocation, Display = "See Data Model Sheet" };
+            Hyperlink hyperlink15 = new Hyperlink() { Reference = "I74", Location = dataModelLocation, Display = "See Data Model Sheet" };
 
             hyperlinks1.Append(hyperlink1);
             hyperlinks1.Append(hyperlink2);
@@ -2591,6 +2598,7 @@ namespace Sandbox.OpenXML
             hyperlinks1.Append(hyperlink13);
             hyperlinks1.Append(hyperlink14);
             hyperlinks1.Append(hyperlink15);
+
             PageMargins pageMargins3 = new PageMargins() { Left = 0.7D, Right = 0.7D, Top = 0.75D, Bottom = 0.75D, Header = 0.3D, Footer = 0.3D };
             PageSetup pageSetup3 = new PageSetup() { Scale = (UInt32Value)76U, Orientation = OrientationValues.Portrait, HorizontalDpi = (UInt32Value)0U, VerticalDpi = (UInt32Value)0U };
 
