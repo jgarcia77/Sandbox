@@ -304,97 +304,71 @@ namespace Sandbox.OpenXML
 
             var inlineString2060 = new InlineString();
 
-            Run run19 = new Run();
+            inlineString2060.Append
+            (
+                new Run
+                (
+                    new RunProperties
+                    (
+                        new Bold(), 
+                        new FontSize() { Val = 20D }, 
+                        new Color() { Theme = (UInt32Value)1U }, 
+                        new RunFont() { Val = "Calibri" }, 
+                        new FontFamily() { Val = 2 }, 
+                        new FontScheme() { Val = FontSchemeValues.Minor }
+                    ),
+                    new Text("Steps to Performing Substantive Analytical procedures using Reveal")
+                )
+            );
 
-            RunProperties runProperties19 = new RunProperties();
-            Bold bold8 = new Bold();
-            FontSize fontSize15 = new FontSize() { Val = 20D };
-            Color color15 = new Color() { Theme = (UInt32Value)1U };
-            RunFont runFont15 = new RunFont() { Val = "Calibri" };
-            FontFamily fontFamily15 = new FontFamily() { Val = 2 };
-            FontScheme fontScheme15 = new FontScheme() { Val = FontSchemeValues.Minor };
+            inlineString2060.Append
+            (
+                new Run
+                (
+                    new RunProperties
+                    (
+                        new FontSize() { Val = 12D },
+                        new Color() { Theme = (UInt32Value)1U },
+                        new RunFont() { Val = "Calibri" },
+                        new FontFamily() { Val = 2 },
+                        new FontScheme() { Val = FontSchemeValues.Minor }
+                    ),
+                    new Text("\n\n") { Space = SpaceProcessingModeValues.Preserve }
+                )
+            );
 
-            runProperties19.Append(bold8);
-            runProperties19.Append(fontSize15);
-            runProperties19.Append(color15);
-            runProperties19.Append(runFont15);
-            runProperties19.Append(fontFamily15);
-            runProperties19.Append(fontScheme15);
-            Text text131 = new Text();
-            text131.Text = "Steps to Performing Substantive Analytical procedures using Reveal";
+            inlineString2060.Append
+            (
+                new Run
+                (
+                    new RunProperties
+                    (
+                        new Bold(),
+                        new FontSize() { Val = 12D },
+                        new Color() { Theme = (UInt32Value)1U },
+                        new RunFont() { Val = "Calibri" },
+                        new FontFamily() { Val = 2 },
+                        new FontScheme() { Val = FontSchemeValues.Minor }
+                    ),
+                    new Text("Note")
+                )
+            );
 
-            run19.Append(runProperties19);
-            run19.Append(text131);
-
-            inlineString2060.Append(run19);
-
-            Run run20 = new Run();
-
-            RunProperties runProperties20 = new RunProperties();
-            FontSize fontSize16 = new FontSize() { Val = 12D };
-            Color color16 = new Color() { Theme = (UInt32Value)1U };
-            RunFont runFont16 = new RunFont() { Val = "Calibri" };
-            FontFamily fontFamily16 = new FontFamily() { Val = 2 };
-            FontScheme fontScheme16 = new FontScheme() { Val = FontSchemeValues.Minor };
-
-            runProperties20.Append(fontSize16);
-            runProperties20.Append(color16);
-            runProperties20.Append(runFont16);
-            runProperties20.Append(fontFamily16);
-            runProperties20.Append(fontScheme16);
-            Text text132 = new Text() { Space = SpaceProcessingModeValues.Preserve };
-            text132.Text = "\n\n";
-
-            run20.Append(runProperties20);
-            run20.Append(text132);
-
-            inlineString2060.Append(run20);
-
-            Run run21 = new Run();
-
-            RunProperties runProperties21 = new RunProperties();
-            Bold bold9 = new Bold();
-            FontSize fontSize17 = new FontSize() { Val = 12D };
-            Color color17 = new Color() { Theme = (UInt32Value)1U };
-            RunFont runFont17 = new RunFont() { Val = "Calibri" };
-            FontFamily fontFamily17 = new FontFamily() { Val = 2 };
-            FontScheme fontScheme17 = new FontScheme() { Val = FontSchemeValues.Minor };
-
-            runProperties21.Append(bold9);
-            runProperties21.Append(fontSize17);
-            runProperties21.Append(color17);
-            runProperties21.Append(runFont17);
-            runProperties21.Append(fontFamily17);
-            runProperties21.Append(fontScheme17);
-            Text text133 = new Text();
-            text133.Text = "Note";
-
-            run21.Append(runProperties21);
-            run21.Append(text133);
-
-            inlineString2060.Append(run21);
-
-            Run run22 = new Run();
-
-            RunProperties runProperties22 = new RunProperties();
-            FontSize fontSize18 = new FontSize() { Val = 12D };
-            Color color18 = new Color() { Theme = (UInt32Value)1U };
-            RunFont runFont18 = new RunFont() { Val = "Calibri" };
-            FontFamily fontFamily18 = new FontFamily() { Val = 2 };
-            FontScheme fontScheme18 = new FontScheme() { Val = FontSchemeValues.Minor };
-
-            runProperties22.Append(fontSize18);
-            runProperties22.Append(color18);
-            runProperties22.Append(runFont18);
-            runProperties22.Append(fontFamily18);
-            runProperties22.Append(fontScheme18);
-            Text text134 = new Text();
-            text134.Text = ":  For additional guidance regarding the use of Reveal, refer to the Performing Substantive Analytical Procedures guide available in the Deloitte Technical Library.";
-
-            run22.Append(runProperties22);
-            run22.Append(text134);
-
-            inlineString2060.Append(run22);
+            inlineString2060.Append
+            (
+                new Run
+                (
+                    new RunProperties
+                    (
+                        new FontSize() { Val = 12D },
+                        new Color() { Theme = (UInt32Value)1U },
+                        new RunFont() { Val = "Calibri" },
+                        new FontFamily() { Val = 2 },
+                        new FontScheme() { Val = FontSchemeValues.Minor }
+                    ),
+                    new Text(":  For additional guidance regarding the use of Reveal, refer to the Performing Substantive Analytical Procedures guide available in the Deloitte Technical Library.")
+                )
+            );
 
             Cell cell2060 = new Cell(inlineString2060) { CellReference = "B10", StyleIndex = (UInt32Value)90U, DataType = CellValues.InlineString };
             
