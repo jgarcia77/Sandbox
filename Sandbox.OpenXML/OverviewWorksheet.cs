@@ -1,13 +1,8 @@
 ﻿using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Spreadsheet;
-using X15ac = DocumentFormat.OpenXml.Office2013.ExcelAc;
 using Xdr = DocumentFormat.OpenXml.Drawing.Spreadsheet;
 using A = DocumentFormat.OpenXml.Drawing;
-using X14 = DocumentFormat.OpenXml.Office2010.Excel;
-using X15 = DocumentFormat.OpenXml.Office2013.Excel;
-using Thm15 = DocumentFormat.OpenXml.Office2013.Theme;
-
 
 namespace Sandbox.OpenXML
 {
@@ -29,8 +24,7 @@ namespace Sandbox.OpenXML
 
             drawingsPart.AddPart(imagePart, "rId1");
         }
-
-        // Generates content of worksheetPart3.
+                
         private void GenerateWorksheetPartContent(WorksheetPart worksheetPart)
         {
             Worksheet worksheet = new Worksheet() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "x14ac" } };
@@ -2524,8 +2518,7 @@ namespace Sandbox.OpenXML
 
             worksheetPart.Worksheet = worksheet;
         }
-
-        // Generates content of drawingsPart3.
+        
         private void GenerateDrawingsPartContent(DrawingsPart drawingsPart)
         {
             Xdr.WorksheetDrawing worksheetDrawing = new Xdr.WorksheetDrawing();

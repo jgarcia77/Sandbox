@@ -1,23 +1,13 @@
 ﻿using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Spreadsheet;
-using X15ac = DocumentFormat.OpenXml.Office2013.ExcelAc;
-using Xdr = DocumentFormat.OpenXml.Drawing.Spreadsheet;
-using A = DocumentFormat.OpenXml.Drawing;
 using X14 = DocumentFormat.OpenXml.Office2010.Excel;
 using X15 = DocumentFormat.OpenXml.Office2013.Excel;
-using Thm15 = DocumentFormat.OpenXml.Office2013.Theme;
 
 namespace Sandbox.OpenXML
 {
     public class RevealExport
     {
-        public RevealExport()
-        {
-            
-        }
-
-        // Creates a SpreadsheetDocument.
         public void CreatePackage(string filePath)
         {
             using (SpreadsheetDocument package = SpreadsheetDocument.Create(filePath, SpreadsheetDocumentType.Workbook))
@@ -25,100 +15,63 @@ namespace Sandbox.OpenXML
                 CreateParts(package);
             }
         }
-
-        // Adds child parts and generates content of the specified part.
+                
         private void CreateParts(SpreadsheetDocument document)
         {
             var totalReports = 1;
 
-            WorkbookPart workbookPart1 = document.AddWorkbookPart();
-            GenerateWorkbookPart1Content(workbookPart1, totalReports);
+            WorkbookPart workbookPart = document.AddWorkbookPart();
+            GenerateWorkbookPartContent(workbookPart, totalReports);
 
             for (var i = 1; i <= totalReports; i++)
             {
                 var worksheets = new AnalysisWorksheets(i);
 
-                worksheets.AppendTo(workbookPart1);
+                worksheets.AppendTo(workbookPart);
             }
 
-            SharedStringTablePart sharedStringTablePart1 = workbookPart1.AddNewPart<SharedStringTablePart>("rId6");
-            GenerateSharedStringTablePart1Content(sharedStringTablePart1);
+            SharedStringTablePart sharedStringTablePart = workbookPart.AddNewPart<SharedStringTablePart>("rId6");
+            GenerateSharedStringTablePart1Content(sharedStringTablePart);
 
-            WorkbookStylesPart workbookStylesPart1 = workbookPart1.AddNewPart<WorkbookStylesPart>("rId5");
-            GenerateWorkbookStylesPart1Content(workbookStylesPart1);
-
-            ThemePart themePart1 = workbookPart1.AddNewPart<ThemePart>("rId4");
-            GenerateThemePart1Content(themePart1);
+            WorkbookStylesPart workbookStylesPart = workbookPart.AddNewPart<WorkbookStylesPart>("rId5");
+            GenerateWorkbookStylesPartContent(workbookStylesPart);
         }
-        
-        // Generates content of workbookPart1.
-        private void GenerateWorkbookPart1Content(WorkbookPart workbookPart1, int totalReports)
+                
+        private void GenerateWorkbookPartContent(WorkbookPart workbookPart, int totalReports)
         {
-            Workbook workbook1 = new Workbook() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "x15" } };
-            workbook1.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
-            workbook1.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
-            workbook1.AddNamespaceDeclaration("x15", "http://schemas.microsoft.com/office/spreadsheetml/2010/11/main");
-            FileVersion fileVersion1 = new FileVersion() { ApplicationName = "xl", LastEdited = "6", LowestEdited = "6", BuildVersion = "14420" };
-            WorkbookProperties workbookProperties1 = new WorkbookProperties();
-
-            AlternateContent alternateContent1 = new AlternateContent();
-            alternateContent1.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
-
-            AlternateContentChoice alternateContentChoice1 = new AlternateContentChoice() { Requires = "x15" };
-
-            X15ac.AbsolutePath absolutePath1 = new X15ac.AbsolutePath() { Url = "C:\\Users\\josueg\\Documents\\Projects\\Deloitte\\STAR Modernization - Deloitte Documents\\" };
-            absolutePath1.AddNamespaceDeclaration("x15ac", "http://schemas.microsoft.com/office/spreadsheetml/2010/11/ac");
-
-            alternateContentChoice1.Append(absolutePath1);
-
-            alternateContent1.Append(alternateContentChoice1);
-
-            BookViews bookViews1 = new BookViews();
-            WorkbookView workbookView1 = new WorkbookView() { XWindow = 0, YWindow = 0, WindowWidth = (UInt32Value)28800U, WindowHeight = (UInt32Value)12710U, TabRatio = (UInt32Value)500U, ActiveTab = (UInt32Value)1U };
-
-            bookViews1.Append(workbookView1);
-
+            Workbook workbook = new Workbook() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "x15" } };
+            workbook.AddNamespaceDeclaration("r", "http://schemas.openxmlformats.org/officeDocument/2006/relationships");
+            workbook.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
+            workbook.AddNamespaceDeclaration("x15", "http://schemas.microsoft.com/office/spreadsheetml/2010/11/main");
+            
             Sheets sheets1 = new Sheets();
+
+            uint sheetId = 0;
 
             for (var i = 1; i <= totalReports; i++)
             {
-                Sheet sheet1 = new Sheet() { Name = string.Concat("Overview", totalReports == 1 ? string.Empty: i.ToString()), SheetId = (UInt32Value)2U, Id = string.Concat("Sequence", i, "_rId1") };
-                Sheet sheet2 = new Sheet() { Name = string.Concat("Data Model", totalReports == 1 ? string.Empty: i.ToString()), SheetId = (UInt32Value)3U, Id = string.Concat("Sequence", i, "_rId2") };
-                Sheet sheet3 = new Sheet() { Name = string.Concat("Results Report", totalReports == 1 ? string.Empty: i.ToString()), SheetId = (UInt32Value)1U, Id = string.Concat("Sequence", i, "_rId3") };
+                sheetId++;
+                Sheet sheet1 = new Sheet() { Name = string.Concat("Overview", totalReports == 1 ? string.Empty: i.ToString()), SheetId = sheetId, Id = string.Concat("Sequence", i, "_rId1") };
+
+                sheetId++;
+                Sheet sheet2 = new Sheet() { Name = string.Concat("Data Model", totalReports == 1 ? string.Empty: i.ToString()), SheetId = sheetId, Id = string.Concat("Sequence", i, "_rId2") };
+
+                sheetId++;
+                Sheet sheet3 = new Sheet() { Name = string.Concat("Results Report", totalReports == 1 ? string.Empty: i.ToString()), SheetId = sheetId, Id = string.Concat("Sequence", i, "_rId3") };
 
                 sheets1.Append(sheet1);
                 sheets1.Append(sheet2);
                 sheets1.Append(sheet3);
             }
-            
-            CalculationProperties calculationProperties1 = new CalculationProperties() { CalculationId = (UInt32Value)150000U, CalculationOnSave = false };
 
-            WorkbookExtensionList workbookExtensionList1 = new WorkbookExtensionList();
+            workbook.Append(sheets1);
 
-            WorkbookExtension workbookExtension1 = new WorkbookExtension() { Uri = "{7523E5D3-25F3-A5E0-1632-64F254C22452}" };
-            workbookExtension1.AddNamespaceDeclaration("mx", "http://schemas.microsoft.com/office/mac/excel/2008/main");
-
-            OpenXmlUnknownElement openXmlUnknownElement1 = OpenXmlUnknownElement.CreateOpenXmlUnknownElement("<mx:ArchID Flags=\"2\" xmlns:mx=\"http://schemas.microsoft.com/office/mac/excel/2008/main\" />");
-
-            workbookExtension1.Append(openXmlUnknownElement1);
-
-            workbookExtensionList1.Append(workbookExtension1);
-            
-            workbook1.Append(fileVersion1);
-            workbook1.Append(workbookProperties1);
-            workbook1.Append(alternateContent1);
-            workbook1.Append(bookViews1);
-            workbook1.Append(sheets1);
-            workbook1.Append(calculationProperties1);
-            workbook1.Append(workbookExtensionList1);
-
-            workbookPart1.Workbook = workbook1;
+            workbookPart.Workbook = workbook;
         }
-         
-        // Generates content of sharedStringTablePart1.
-        private void GenerateSharedStringTablePart1Content(SharedStringTablePart sharedStringTablePart1)
+                
+        private void GenerateSharedStringTablePart1Content(SharedStringTablePart sharedStringTablePart)
         {
-            SharedStringTable sharedStringTable1 = new SharedStringTable() { Count = (UInt32Value)162U, UniqueCount = (UInt32Value)125U };
+            SharedStringTable sharedStringTable = new SharedStringTable() { Count = (UInt32Value)162U, UniqueCount = (UInt32Value)125U };
 
             SharedStringItem sharedStringItem1 = new SharedStringItem();
             Text text5 = new Text();
@@ -1242,141 +1195,141 @@ namespace Sandbox.OpenXML
 
             sharedStringItem125.Append(text139);
 
-            sharedStringTable1.Append(sharedStringItem1);
-            sharedStringTable1.Append(sharedStringItem2);
-            sharedStringTable1.Append(sharedStringItem3);
-            sharedStringTable1.Append(sharedStringItem4);
-            sharedStringTable1.Append(sharedStringItem5);
-            sharedStringTable1.Append(sharedStringItem6);
-            sharedStringTable1.Append(sharedStringItem7);
-            sharedStringTable1.Append(sharedStringItem8);
-            sharedStringTable1.Append(sharedStringItem9);
-            sharedStringTable1.Append(sharedStringItem10);
-            sharedStringTable1.Append(sharedStringItem11);
-            sharedStringTable1.Append(sharedStringItem12);
-            sharedStringTable1.Append(sharedStringItem13);
-            sharedStringTable1.Append(sharedStringItem14);
-            sharedStringTable1.Append(sharedStringItem15);
-            sharedStringTable1.Append(sharedStringItem16);
-            sharedStringTable1.Append(sharedStringItem17);
-            sharedStringTable1.Append(sharedStringItem18);
-            sharedStringTable1.Append(sharedStringItem19);
-            sharedStringTable1.Append(sharedStringItem20);
-            sharedStringTable1.Append(sharedStringItem21);
-            sharedStringTable1.Append(sharedStringItem22);
-            sharedStringTable1.Append(sharedStringItem23);
-            sharedStringTable1.Append(sharedStringItem24);
-            sharedStringTable1.Append(sharedStringItem25);
-            sharedStringTable1.Append(sharedStringItem26);
-            sharedStringTable1.Append(sharedStringItem27);
-            sharedStringTable1.Append(sharedStringItem28);
-            sharedStringTable1.Append(sharedStringItem29);
-            sharedStringTable1.Append(sharedStringItem30);
-            sharedStringTable1.Append(sharedStringItem31);
-            sharedStringTable1.Append(sharedStringItem32);
-            sharedStringTable1.Append(sharedStringItem33);
-            sharedStringTable1.Append(sharedStringItem34);
-            sharedStringTable1.Append(sharedStringItem35);
-            sharedStringTable1.Append(sharedStringItem36);
-            sharedStringTable1.Append(sharedStringItem37);
-            sharedStringTable1.Append(sharedStringItem38);
-            sharedStringTable1.Append(sharedStringItem39);
-            sharedStringTable1.Append(sharedStringItem40);
-            sharedStringTable1.Append(sharedStringItem41);
-            sharedStringTable1.Append(sharedStringItem42);
-            sharedStringTable1.Append(sharedStringItem43);
-            sharedStringTable1.Append(sharedStringItem44);
-            sharedStringTable1.Append(sharedStringItem45);
-            sharedStringTable1.Append(sharedStringItem46);
-            sharedStringTable1.Append(sharedStringItem47);
-            sharedStringTable1.Append(sharedStringItem48);
-            sharedStringTable1.Append(sharedStringItem49);
-            sharedStringTable1.Append(sharedStringItem50);
-            sharedStringTable1.Append(sharedStringItem51);
-            sharedStringTable1.Append(sharedStringItem52);
-            sharedStringTable1.Append(sharedStringItem53);
-            sharedStringTable1.Append(sharedStringItem54);
-            sharedStringTable1.Append(sharedStringItem55);
-            sharedStringTable1.Append(sharedStringItem56);
-            sharedStringTable1.Append(sharedStringItem57);
-            sharedStringTable1.Append(sharedStringItem58);
-            sharedStringTable1.Append(sharedStringItem59);
-            sharedStringTable1.Append(sharedStringItem60);
-            sharedStringTable1.Append(sharedStringItem61);
-            sharedStringTable1.Append(sharedStringItem62);
-            sharedStringTable1.Append(sharedStringItem63);
-            sharedStringTable1.Append(sharedStringItem64);
-            sharedStringTable1.Append(sharedStringItem65);
-            sharedStringTable1.Append(sharedStringItem66);
-            sharedStringTable1.Append(sharedStringItem67);
-            sharedStringTable1.Append(sharedStringItem68);
-            sharedStringTable1.Append(sharedStringItem69);
-            sharedStringTable1.Append(sharedStringItem70);
-            sharedStringTable1.Append(sharedStringItem71);
-            sharedStringTable1.Append(sharedStringItem72);
-            sharedStringTable1.Append(sharedStringItem73);
-            sharedStringTable1.Append(sharedStringItem74);
-            sharedStringTable1.Append(sharedStringItem75);
-            sharedStringTable1.Append(sharedStringItem76);
-            sharedStringTable1.Append(sharedStringItem77);
-            sharedStringTable1.Append(sharedStringItem78);
-            sharedStringTable1.Append(sharedStringItem79);
-            sharedStringTable1.Append(sharedStringItem80);
-            sharedStringTable1.Append(sharedStringItem81);
-            sharedStringTable1.Append(sharedStringItem82);
-            sharedStringTable1.Append(sharedStringItem83);
-            sharedStringTable1.Append(sharedStringItem84);
-            sharedStringTable1.Append(sharedStringItem85);
-            sharedStringTable1.Append(sharedStringItem86);
-            sharedStringTable1.Append(sharedStringItem87);
-            sharedStringTable1.Append(sharedStringItem88);
-            sharedStringTable1.Append(sharedStringItem89);
-            sharedStringTable1.Append(sharedStringItem90);
-            sharedStringTable1.Append(sharedStringItem91);
-            sharedStringTable1.Append(sharedStringItem92);
-            sharedStringTable1.Append(sharedStringItem93);
-            sharedStringTable1.Append(sharedStringItem94);
-            sharedStringTable1.Append(sharedStringItem95);
-            sharedStringTable1.Append(sharedStringItem96);
-            sharedStringTable1.Append(sharedStringItem97);
-            sharedStringTable1.Append(sharedStringItem98);
-            sharedStringTable1.Append(sharedStringItem99);
-            sharedStringTable1.Append(sharedStringItem100);
-            sharedStringTable1.Append(sharedStringItem101);
-            sharedStringTable1.Append(sharedStringItem102);
-            sharedStringTable1.Append(sharedStringItem103);
-            sharedStringTable1.Append(sharedStringItem104);
-            sharedStringTable1.Append(sharedStringItem105);
-            sharedStringTable1.Append(sharedStringItem106);
-            sharedStringTable1.Append(sharedStringItem107);
-            sharedStringTable1.Append(sharedStringItem108);
-            sharedStringTable1.Append(sharedStringItem109);
-            sharedStringTable1.Append(sharedStringItem110);
-            sharedStringTable1.Append(sharedStringItem111);
-            sharedStringTable1.Append(sharedStringItem112);
-            sharedStringTable1.Append(sharedStringItem113);
-            sharedStringTable1.Append(sharedStringItem114);
-            sharedStringTable1.Append(sharedStringItem115);
-            sharedStringTable1.Append(sharedStringItem116);
-            sharedStringTable1.Append(sharedStringItem117);
-            sharedStringTable1.Append(sharedStringItem118);
-            sharedStringTable1.Append(sharedStringItem119);
-            sharedStringTable1.Append(sharedStringItem120);
-            sharedStringTable1.Append(sharedStringItem121);
-            sharedStringTable1.Append(sharedStringItem122);
-            sharedStringTable1.Append(sharedStringItem123);
-            sharedStringTable1.Append(sharedStringItem124);
-            sharedStringTable1.Append(sharedStringItem125);
+            sharedStringTable.Append(sharedStringItem1);
+            sharedStringTable.Append(sharedStringItem2);
+            sharedStringTable.Append(sharedStringItem3);
+            sharedStringTable.Append(sharedStringItem4);
+            sharedStringTable.Append(sharedStringItem5);
+            sharedStringTable.Append(sharedStringItem6);
+            sharedStringTable.Append(sharedStringItem7);
+            sharedStringTable.Append(sharedStringItem8);
+            sharedStringTable.Append(sharedStringItem9);
+            sharedStringTable.Append(sharedStringItem10);
+            sharedStringTable.Append(sharedStringItem11);
+            sharedStringTable.Append(sharedStringItem12);
+            sharedStringTable.Append(sharedStringItem13);
+            sharedStringTable.Append(sharedStringItem14);
+            sharedStringTable.Append(sharedStringItem15);
+            sharedStringTable.Append(sharedStringItem16);
+            sharedStringTable.Append(sharedStringItem17);
+            sharedStringTable.Append(sharedStringItem18);
+            sharedStringTable.Append(sharedStringItem19);
+            sharedStringTable.Append(sharedStringItem20);
+            sharedStringTable.Append(sharedStringItem21);
+            sharedStringTable.Append(sharedStringItem22);
+            sharedStringTable.Append(sharedStringItem23);
+            sharedStringTable.Append(sharedStringItem24);
+            sharedStringTable.Append(sharedStringItem25);
+            sharedStringTable.Append(sharedStringItem26);
+            sharedStringTable.Append(sharedStringItem27);
+            sharedStringTable.Append(sharedStringItem28);
+            sharedStringTable.Append(sharedStringItem29);
+            sharedStringTable.Append(sharedStringItem30);
+            sharedStringTable.Append(sharedStringItem31);
+            sharedStringTable.Append(sharedStringItem32);
+            sharedStringTable.Append(sharedStringItem33);
+            sharedStringTable.Append(sharedStringItem34);
+            sharedStringTable.Append(sharedStringItem35);
+            sharedStringTable.Append(sharedStringItem36);
+            sharedStringTable.Append(sharedStringItem37);
+            sharedStringTable.Append(sharedStringItem38);
+            sharedStringTable.Append(sharedStringItem39);
+            sharedStringTable.Append(sharedStringItem40);
+            sharedStringTable.Append(sharedStringItem41);
+            sharedStringTable.Append(sharedStringItem42);
+            sharedStringTable.Append(sharedStringItem43);
+            sharedStringTable.Append(sharedStringItem44);
+            sharedStringTable.Append(sharedStringItem45);
+            sharedStringTable.Append(sharedStringItem46);
+            sharedStringTable.Append(sharedStringItem47);
+            sharedStringTable.Append(sharedStringItem48);
+            sharedStringTable.Append(sharedStringItem49);
+            sharedStringTable.Append(sharedStringItem50);
+            sharedStringTable.Append(sharedStringItem51);
+            sharedStringTable.Append(sharedStringItem52);
+            sharedStringTable.Append(sharedStringItem53);
+            sharedStringTable.Append(sharedStringItem54);
+            sharedStringTable.Append(sharedStringItem55);
+            sharedStringTable.Append(sharedStringItem56);
+            sharedStringTable.Append(sharedStringItem57);
+            sharedStringTable.Append(sharedStringItem58);
+            sharedStringTable.Append(sharedStringItem59);
+            sharedStringTable.Append(sharedStringItem60);
+            sharedStringTable.Append(sharedStringItem61);
+            sharedStringTable.Append(sharedStringItem62);
+            sharedStringTable.Append(sharedStringItem63);
+            sharedStringTable.Append(sharedStringItem64);
+            sharedStringTable.Append(sharedStringItem65);
+            sharedStringTable.Append(sharedStringItem66);
+            sharedStringTable.Append(sharedStringItem67);
+            sharedStringTable.Append(sharedStringItem68);
+            sharedStringTable.Append(sharedStringItem69);
+            sharedStringTable.Append(sharedStringItem70);
+            sharedStringTable.Append(sharedStringItem71);
+            sharedStringTable.Append(sharedStringItem72);
+            sharedStringTable.Append(sharedStringItem73);
+            sharedStringTable.Append(sharedStringItem74);
+            sharedStringTable.Append(sharedStringItem75);
+            sharedStringTable.Append(sharedStringItem76);
+            sharedStringTable.Append(sharedStringItem77);
+            sharedStringTable.Append(sharedStringItem78);
+            sharedStringTable.Append(sharedStringItem79);
+            sharedStringTable.Append(sharedStringItem80);
+            sharedStringTable.Append(sharedStringItem81);
+            sharedStringTable.Append(sharedStringItem82);
+            sharedStringTable.Append(sharedStringItem83);
+            sharedStringTable.Append(sharedStringItem84);
+            sharedStringTable.Append(sharedStringItem85);
+            sharedStringTable.Append(sharedStringItem86);
+            sharedStringTable.Append(sharedStringItem87);
+            sharedStringTable.Append(sharedStringItem88);
+            sharedStringTable.Append(sharedStringItem89);
+            sharedStringTable.Append(sharedStringItem90);
+            sharedStringTable.Append(sharedStringItem91);
+            sharedStringTable.Append(sharedStringItem92);
+            sharedStringTable.Append(sharedStringItem93);
+            sharedStringTable.Append(sharedStringItem94);
+            sharedStringTable.Append(sharedStringItem95);
+            sharedStringTable.Append(sharedStringItem96);
+            sharedStringTable.Append(sharedStringItem97);
+            sharedStringTable.Append(sharedStringItem98);
+            sharedStringTable.Append(sharedStringItem99);
+            sharedStringTable.Append(sharedStringItem100);
+            sharedStringTable.Append(sharedStringItem101);
+            sharedStringTable.Append(sharedStringItem102);
+            sharedStringTable.Append(sharedStringItem103);
+            sharedStringTable.Append(sharedStringItem104);
+            sharedStringTable.Append(sharedStringItem105);
+            sharedStringTable.Append(sharedStringItem106);
+            sharedStringTable.Append(sharedStringItem107);
+            sharedStringTable.Append(sharedStringItem108);
+            sharedStringTable.Append(sharedStringItem109);
+            sharedStringTable.Append(sharedStringItem110);
+            sharedStringTable.Append(sharedStringItem111);
+            sharedStringTable.Append(sharedStringItem112);
+            sharedStringTable.Append(sharedStringItem113);
+            sharedStringTable.Append(sharedStringItem114);
+            sharedStringTable.Append(sharedStringItem115);
+            sharedStringTable.Append(sharedStringItem116);
+            sharedStringTable.Append(sharedStringItem117);
+            sharedStringTable.Append(sharedStringItem118);
+            sharedStringTable.Append(sharedStringItem119);
+            sharedStringTable.Append(sharedStringItem120);
+            sharedStringTable.Append(sharedStringItem121);
+            sharedStringTable.Append(sharedStringItem122);
+            sharedStringTable.Append(sharedStringItem123);
+            sharedStringTable.Append(sharedStringItem124);
+            sharedStringTable.Append(sharedStringItem125);
 
-            sharedStringTablePart1.SharedStringTable = sharedStringTable1;
+            sharedStringTablePart.SharedStringTable = sharedStringTable;
         }
 
         // Generates content of workbookStylesPart1.
-        private void GenerateWorkbookStylesPart1Content(WorkbookStylesPart workbookStylesPart1)
+        private void GenerateWorkbookStylesPartContent(WorkbookStylesPart workbookStylesPart)
         {
-            Stylesheet stylesheet1 = new Stylesheet() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "x14ac" } };
-            stylesheet1.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
-            stylesheet1.AddNamespaceDeclaration("x14ac", "http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac");
+            Stylesheet stylesheet = new Stylesheet() { MCAttributes = new MarkupCompatibilityAttributes() { Ignorable = "x14ac" } };
+            stylesheet.AddNamespaceDeclaration("mc", "http://schemas.openxmlformats.org/markup-compatibility/2006");
+            stylesheet.AddNamespaceDeclaration("x14ac", "http://schemas.microsoft.com/office/spreadsheetml/2009/9/ac");
 
             NumberingFormats numberingFormats1 = new NumberingFormats() { Count = (UInt32Value)2U };
             NumberingFormat numberingFormat1 = new NumberingFormat() { NumberFormatId = (UInt32Value)164U, FormatCode = "m/d/yy\\ h:mm;@" };
@@ -3831,543 +3784,19 @@ namespace Sandbox.OpenXML
             stylesheetExtensionList1.Append(stylesheetExtension1);
             stylesheetExtensionList1.Append(stylesheetExtension2);
 
-            stylesheet1.Append(numberingFormats1);
-            stylesheet1.Append(fonts1);
-            stylesheet1.Append(fills1);
-            stylesheet1.Append(borders1);
-            stylesheet1.Append(cellStyleFormats1);
-            stylesheet1.Append(cellFormats1);
-            stylesheet1.Append(cellStyles1);
-            stylesheet1.Append(differentialFormats1);
-            stylesheet1.Append(tableStyles1);
-            stylesheet1.Append(colors1);
-            stylesheet1.Append(stylesheetExtensionList1);
-
-            workbookStylesPart1.Stylesheet = stylesheet1;
-        }
-
-        // Generates content of themePart1.
-        private void GenerateThemePart1Content(ThemePart themePart1)
-        {
-            A.Theme theme1 = new A.Theme() { Name = "Office Theme" };
-            theme1.AddNamespaceDeclaration("a", "http://schemas.openxmlformats.org/drawingml/2006/main");
-
-            A.ThemeElements themeElements1 = new A.ThemeElements();
-
-            A.ColorScheme colorScheme1 = new A.ColorScheme() { Name = "Office" };
-
-            A.Dark1Color dark1Color1 = new A.Dark1Color();
-            A.SystemColor systemColor1 = new A.SystemColor() { Val = A.SystemColorValues.WindowText, LastColor = "000000" };
-
-            dark1Color1.Append(systemColor1);
-
-            A.Light1Color light1Color1 = new A.Light1Color();
-            A.SystemColor systemColor2 = new A.SystemColor() { Val = A.SystemColorValues.Window, LastColor = "FFFFFF" };
-
-            light1Color1.Append(systemColor2);
-
-            A.Dark2Color dark2Color1 = new A.Dark2Color();
-            A.RgbColorModelHex rgbColorModelHex1 = new A.RgbColorModelHex() { Val = "44546A" };
-
-            dark2Color1.Append(rgbColorModelHex1);
-
-            A.Light2Color light2Color1 = new A.Light2Color();
-            A.RgbColorModelHex rgbColorModelHex2 = new A.RgbColorModelHex() { Val = "E7E6E6" };
-
-            light2Color1.Append(rgbColorModelHex2);
-
-            A.Accent1Color accent1Color1 = new A.Accent1Color();
-            A.RgbColorModelHex rgbColorModelHex3 = new A.RgbColorModelHex() { Val = "4472C4" };
-
-            accent1Color1.Append(rgbColorModelHex3);
-
-            A.Accent2Color accent2Color1 = new A.Accent2Color();
-            A.RgbColorModelHex rgbColorModelHex4 = new A.RgbColorModelHex() { Val = "ED7D31" };
-
-            accent2Color1.Append(rgbColorModelHex4);
-
-            A.Accent3Color accent3Color1 = new A.Accent3Color();
-            A.RgbColorModelHex rgbColorModelHex5 = new A.RgbColorModelHex() { Val = "A5A5A5" };
-
-            accent3Color1.Append(rgbColorModelHex5);
-
-            A.Accent4Color accent4Color1 = new A.Accent4Color();
-            A.RgbColorModelHex rgbColorModelHex6 = new A.RgbColorModelHex() { Val = "FFC000" };
-
-            accent4Color1.Append(rgbColorModelHex6);
-
-            A.Accent5Color accent5Color1 = new A.Accent5Color();
-            A.RgbColorModelHex rgbColorModelHex7 = new A.RgbColorModelHex() { Val = "5B9BD5" };
-
-            accent5Color1.Append(rgbColorModelHex7);
-
-            A.Accent6Color accent6Color1 = new A.Accent6Color();
-            A.RgbColorModelHex rgbColorModelHex8 = new A.RgbColorModelHex() { Val = "70AD47" };
-
-            accent6Color1.Append(rgbColorModelHex8);
-
-            A.Hyperlink hyperlink16 = new A.Hyperlink();
-            A.RgbColorModelHex rgbColorModelHex9 = new A.RgbColorModelHex() { Val = "0563C1" };
-
-            hyperlink16.Append(rgbColorModelHex9);
-
-            A.FollowedHyperlinkColor followedHyperlinkColor1 = new A.FollowedHyperlinkColor();
-            A.RgbColorModelHex rgbColorModelHex10 = new A.RgbColorModelHex() { Val = "954F72" };
-
-            followedHyperlinkColor1.Append(rgbColorModelHex10);
-
-            colorScheme1.Append(dark1Color1);
-            colorScheme1.Append(light1Color1);
-            colorScheme1.Append(dark2Color1);
-            colorScheme1.Append(light2Color1);
-            colorScheme1.Append(accent1Color1);
-            colorScheme1.Append(accent2Color1);
-            colorScheme1.Append(accent3Color1);
-            colorScheme1.Append(accent4Color1);
-            colorScheme1.Append(accent5Color1);
-            colorScheme1.Append(accent6Color1);
-            colorScheme1.Append(hyperlink16);
-            colorScheme1.Append(followedHyperlinkColor1);
-
-            A.FontScheme fontScheme33 = new A.FontScheme() { Name = "Office" };
-
-            A.MajorFont majorFont1 = new A.MajorFont();
-            A.LatinFont latinFont1 = new A.LatinFont() { Typeface = "Calibri Light", Panose = "020F0302020204030204" };
-            A.EastAsianFont eastAsianFont1 = new A.EastAsianFont() { Typeface = "" };
-            A.ComplexScriptFont complexScriptFont1 = new A.ComplexScriptFont() { Typeface = "" };
-            A.SupplementalFont supplementalFont1 = new A.SupplementalFont() { Script = "Jpan", Typeface = "Yu Gothic Light" };
-            A.SupplementalFont supplementalFont2 = new A.SupplementalFont() { Script = "Hang", Typeface = "맑은 고딕" };
-            A.SupplementalFont supplementalFont3 = new A.SupplementalFont() { Script = "Hans", Typeface = "DengXian Light" };
-            A.SupplementalFont supplementalFont4 = new A.SupplementalFont() { Script = "Hant", Typeface = "新細明體" };
-            A.SupplementalFont supplementalFont5 = new A.SupplementalFont() { Script = "Arab", Typeface = "Times New Roman" };
-            A.SupplementalFont supplementalFont6 = new A.SupplementalFont() { Script = "Hebr", Typeface = "Times New Roman" };
-            A.SupplementalFont supplementalFont7 = new A.SupplementalFont() { Script = "Thai", Typeface = "Tahoma" };
-            A.SupplementalFont supplementalFont8 = new A.SupplementalFont() { Script = "Ethi", Typeface = "Nyala" };
-            A.SupplementalFont supplementalFont9 = new A.SupplementalFont() { Script = "Beng", Typeface = "Vrinda" };
-            A.SupplementalFont supplementalFont10 = new A.SupplementalFont() { Script = "Gujr", Typeface = "Shruti" };
-            A.SupplementalFont supplementalFont11 = new A.SupplementalFont() { Script = "Khmr", Typeface = "MoolBoran" };
-            A.SupplementalFont supplementalFont12 = new A.SupplementalFont() { Script = "Knda", Typeface = "Tunga" };
-            A.SupplementalFont supplementalFont13 = new A.SupplementalFont() { Script = "Guru", Typeface = "Raavi" };
-            A.SupplementalFont supplementalFont14 = new A.SupplementalFont() { Script = "Cans", Typeface = "Euphemia" };
-            A.SupplementalFont supplementalFont15 = new A.SupplementalFont() { Script = "Cher", Typeface = "Plantagenet Cherokee" };
-            A.SupplementalFont supplementalFont16 = new A.SupplementalFont() { Script = "Yiii", Typeface = "Microsoft Yi Baiti" };
-            A.SupplementalFont supplementalFont17 = new A.SupplementalFont() { Script = "Tibt", Typeface = "Microsoft Himalaya" };
-            A.SupplementalFont supplementalFont18 = new A.SupplementalFont() { Script = "Thaa", Typeface = "MV Boli" };
-            A.SupplementalFont supplementalFont19 = new A.SupplementalFont() { Script = "Deva", Typeface = "Mangal" };
-            A.SupplementalFont supplementalFont20 = new A.SupplementalFont() { Script = "Telu", Typeface = "Gautami" };
-            A.SupplementalFont supplementalFont21 = new A.SupplementalFont() { Script = "Taml", Typeface = "Latha" };
-            A.SupplementalFont supplementalFont22 = new A.SupplementalFont() { Script = "Syrc", Typeface = "Estrangelo Edessa" };
-            A.SupplementalFont supplementalFont23 = new A.SupplementalFont() { Script = "Orya", Typeface = "Kalinga" };
-            A.SupplementalFont supplementalFont24 = new A.SupplementalFont() { Script = "Mlym", Typeface = "Kartika" };
-            A.SupplementalFont supplementalFont25 = new A.SupplementalFont() { Script = "Laoo", Typeface = "DokChampa" };
-            A.SupplementalFont supplementalFont26 = new A.SupplementalFont() { Script = "Sinh", Typeface = "Iskoola Pota" };
-            A.SupplementalFont supplementalFont27 = new A.SupplementalFont() { Script = "Mong", Typeface = "Mongolian Baiti" };
-            A.SupplementalFont supplementalFont28 = new A.SupplementalFont() { Script = "Viet", Typeface = "Times New Roman" };
-            A.SupplementalFont supplementalFont29 = new A.SupplementalFont() { Script = "Uigh", Typeface = "Microsoft Uighur" };
-            A.SupplementalFont supplementalFont30 = new A.SupplementalFont() { Script = "Geor", Typeface = "Sylfaen" };
-
-            majorFont1.Append(latinFont1);
-            majorFont1.Append(eastAsianFont1);
-            majorFont1.Append(complexScriptFont1);
-            majorFont1.Append(supplementalFont1);
-            majorFont1.Append(supplementalFont2);
-            majorFont1.Append(supplementalFont3);
-            majorFont1.Append(supplementalFont4);
-            majorFont1.Append(supplementalFont5);
-            majorFont1.Append(supplementalFont6);
-            majorFont1.Append(supplementalFont7);
-            majorFont1.Append(supplementalFont8);
-            majorFont1.Append(supplementalFont9);
-            majorFont1.Append(supplementalFont10);
-            majorFont1.Append(supplementalFont11);
-            majorFont1.Append(supplementalFont12);
-            majorFont1.Append(supplementalFont13);
-            majorFont1.Append(supplementalFont14);
-            majorFont1.Append(supplementalFont15);
-            majorFont1.Append(supplementalFont16);
-            majorFont1.Append(supplementalFont17);
-            majorFont1.Append(supplementalFont18);
-            majorFont1.Append(supplementalFont19);
-            majorFont1.Append(supplementalFont20);
-            majorFont1.Append(supplementalFont21);
-            majorFont1.Append(supplementalFont22);
-            majorFont1.Append(supplementalFont23);
-            majorFont1.Append(supplementalFont24);
-            majorFont1.Append(supplementalFont25);
-            majorFont1.Append(supplementalFont26);
-            majorFont1.Append(supplementalFont27);
-            majorFont1.Append(supplementalFont28);
-            majorFont1.Append(supplementalFont29);
-            majorFont1.Append(supplementalFont30);
-
-            A.MinorFont minorFont1 = new A.MinorFont();
-            A.LatinFont latinFont2 = new A.LatinFont() { Typeface = "Calibri", Panose = "020F0502020204030204" };
-            A.EastAsianFont eastAsianFont2 = new A.EastAsianFont() { Typeface = "" };
-            A.ComplexScriptFont complexScriptFont2 = new A.ComplexScriptFont() { Typeface = "" };
-            A.SupplementalFont supplementalFont31 = new A.SupplementalFont() { Script = "Jpan", Typeface = "Yu Gothic" };
-            A.SupplementalFont supplementalFont32 = new A.SupplementalFont() { Script = "Hang", Typeface = "맑은 고딕" };
-            A.SupplementalFont supplementalFont33 = new A.SupplementalFont() { Script = "Hans", Typeface = "DengXian" };
-            A.SupplementalFont supplementalFont34 = new A.SupplementalFont() { Script = "Hant", Typeface = "新細明體" };
-            A.SupplementalFont supplementalFont35 = new A.SupplementalFont() { Script = "Arab", Typeface = "Arial" };
-            A.SupplementalFont supplementalFont36 = new A.SupplementalFont() { Script = "Hebr", Typeface = "Arial" };
-            A.SupplementalFont supplementalFont37 = new A.SupplementalFont() { Script = "Thai", Typeface = "Tahoma" };
-            A.SupplementalFont supplementalFont38 = new A.SupplementalFont() { Script = "Ethi", Typeface = "Nyala" };
-            A.SupplementalFont supplementalFont39 = new A.SupplementalFont() { Script = "Beng", Typeface = "Vrinda" };
-            A.SupplementalFont supplementalFont40 = new A.SupplementalFont() { Script = "Gujr", Typeface = "Shruti" };
-            A.SupplementalFont supplementalFont41 = new A.SupplementalFont() { Script = "Khmr", Typeface = "DaunPenh" };
-            A.SupplementalFont supplementalFont42 = new A.SupplementalFont() { Script = "Knda", Typeface = "Tunga" };
-            A.SupplementalFont supplementalFont43 = new A.SupplementalFont() { Script = "Guru", Typeface = "Raavi" };
-            A.SupplementalFont supplementalFont44 = new A.SupplementalFont() { Script = "Cans", Typeface = "Euphemia" };
-            A.SupplementalFont supplementalFont45 = new A.SupplementalFont() { Script = "Cher", Typeface = "Plantagenet Cherokee" };
-            A.SupplementalFont supplementalFont46 = new A.SupplementalFont() { Script = "Yiii", Typeface = "Microsoft Yi Baiti" };
-            A.SupplementalFont supplementalFont47 = new A.SupplementalFont() { Script = "Tibt", Typeface = "Microsoft Himalaya" };
-            A.SupplementalFont supplementalFont48 = new A.SupplementalFont() { Script = "Thaa", Typeface = "MV Boli" };
-            A.SupplementalFont supplementalFont49 = new A.SupplementalFont() { Script = "Deva", Typeface = "Mangal" };
-            A.SupplementalFont supplementalFont50 = new A.SupplementalFont() { Script = "Telu", Typeface = "Gautami" };
-            A.SupplementalFont supplementalFont51 = new A.SupplementalFont() { Script = "Taml", Typeface = "Latha" };
-            A.SupplementalFont supplementalFont52 = new A.SupplementalFont() { Script = "Syrc", Typeface = "Estrangelo Edessa" };
-            A.SupplementalFont supplementalFont53 = new A.SupplementalFont() { Script = "Orya", Typeface = "Kalinga" };
-            A.SupplementalFont supplementalFont54 = new A.SupplementalFont() { Script = "Mlym", Typeface = "Kartika" };
-            A.SupplementalFont supplementalFont55 = new A.SupplementalFont() { Script = "Laoo", Typeface = "DokChampa" };
-            A.SupplementalFont supplementalFont56 = new A.SupplementalFont() { Script = "Sinh", Typeface = "Iskoola Pota" };
-            A.SupplementalFont supplementalFont57 = new A.SupplementalFont() { Script = "Mong", Typeface = "Mongolian Baiti" };
-            A.SupplementalFont supplementalFont58 = new A.SupplementalFont() { Script = "Viet", Typeface = "Arial" };
-            A.SupplementalFont supplementalFont59 = new A.SupplementalFont() { Script = "Uigh", Typeface = "Microsoft Uighur" };
-            A.SupplementalFont supplementalFont60 = new A.SupplementalFont() { Script = "Geor", Typeface = "Sylfaen" };
-
-            minorFont1.Append(latinFont2);
-            minorFont1.Append(eastAsianFont2);
-            minorFont1.Append(complexScriptFont2);
-            minorFont1.Append(supplementalFont31);
-            minorFont1.Append(supplementalFont32);
-            minorFont1.Append(supplementalFont33);
-            minorFont1.Append(supplementalFont34);
-            minorFont1.Append(supplementalFont35);
-            minorFont1.Append(supplementalFont36);
-            minorFont1.Append(supplementalFont37);
-            minorFont1.Append(supplementalFont38);
-            minorFont1.Append(supplementalFont39);
-            minorFont1.Append(supplementalFont40);
-            minorFont1.Append(supplementalFont41);
-            minorFont1.Append(supplementalFont42);
-            minorFont1.Append(supplementalFont43);
-            minorFont1.Append(supplementalFont44);
-            minorFont1.Append(supplementalFont45);
-            minorFont1.Append(supplementalFont46);
-            minorFont1.Append(supplementalFont47);
-            minorFont1.Append(supplementalFont48);
-            minorFont1.Append(supplementalFont49);
-            minorFont1.Append(supplementalFont50);
-            minorFont1.Append(supplementalFont51);
-            minorFont1.Append(supplementalFont52);
-            minorFont1.Append(supplementalFont53);
-            minorFont1.Append(supplementalFont54);
-            minorFont1.Append(supplementalFont55);
-            minorFont1.Append(supplementalFont56);
-            minorFont1.Append(supplementalFont57);
-            minorFont1.Append(supplementalFont58);
-            minorFont1.Append(supplementalFont59);
-            minorFont1.Append(supplementalFont60);
-
-            fontScheme33.Append(majorFont1);
-            fontScheme33.Append(minorFont1);
-
-            A.FormatScheme formatScheme1 = new A.FormatScheme() { Name = "Office" };
-
-            A.FillStyleList fillStyleList1 = new A.FillStyleList();
-
-            A.SolidFill solidFill9 = new A.SolidFill();
-            A.SchemeColor schemeColor13 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
-
-            solidFill9.Append(schemeColor13);
-
-            A.GradientFill gradientFill1 = new A.GradientFill() { RotateWithShape = true };
-
-            A.GradientStopList gradientStopList1 = new A.GradientStopList();
-
-            A.GradientStop gradientStop1 = new A.GradientStop() { Position = 0 };
-
-            A.SchemeColor schemeColor14 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
-            A.LuminanceModulation luminanceModulation1 = new A.LuminanceModulation() { Val = 110000 };
-            A.SaturationModulation saturationModulation1 = new A.SaturationModulation() { Val = 105000 };
-            A.Tint tint1 = new A.Tint() { Val = 67000 };
-
-            schemeColor14.Append(luminanceModulation1);
-            schemeColor14.Append(saturationModulation1);
-            schemeColor14.Append(tint1);
-
-            gradientStop1.Append(schemeColor14);
-
-            A.GradientStop gradientStop2 = new A.GradientStop() { Position = 50000 };
-
-            A.SchemeColor schemeColor15 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
-            A.LuminanceModulation luminanceModulation2 = new A.LuminanceModulation() { Val = 105000 };
-            A.SaturationModulation saturationModulation2 = new A.SaturationModulation() { Val = 103000 };
-            A.Tint tint2 = new A.Tint() { Val = 73000 };
-
-            schemeColor15.Append(luminanceModulation2);
-            schemeColor15.Append(saturationModulation2);
-            schemeColor15.Append(tint2);
-
-            gradientStop2.Append(schemeColor15);
-
-            A.GradientStop gradientStop3 = new A.GradientStop() { Position = 100000 };
-
-            A.SchemeColor schemeColor16 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
-            A.LuminanceModulation luminanceModulation3 = new A.LuminanceModulation() { Val = 105000 };
-            A.SaturationModulation saturationModulation3 = new A.SaturationModulation() { Val = 109000 };
-            A.Tint tint3 = new A.Tint() { Val = 81000 };
-
-            schemeColor16.Append(luminanceModulation3);
-            schemeColor16.Append(saturationModulation3);
-            schemeColor16.Append(tint3);
-
-            gradientStop3.Append(schemeColor16);
-
-            gradientStopList1.Append(gradientStop1);
-            gradientStopList1.Append(gradientStop2);
-            gradientStopList1.Append(gradientStop3);
-            A.LinearGradientFill linearGradientFill1 = new A.LinearGradientFill() { Angle = 5400000, Scaled = false };
-
-            gradientFill1.Append(gradientStopList1);
-            gradientFill1.Append(linearGradientFill1);
-
-            A.GradientFill gradientFill2 = new A.GradientFill() { RotateWithShape = true };
-
-            A.GradientStopList gradientStopList2 = new A.GradientStopList();
-
-            A.GradientStop gradientStop4 = new A.GradientStop() { Position = 0 };
-
-            A.SchemeColor schemeColor17 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
-            A.SaturationModulation saturationModulation4 = new A.SaturationModulation() { Val = 103000 };
-            A.LuminanceModulation luminanceModulation4 = new A.LuminanceModulation() { Val = 102000 };
-            A.Tint tint4 = new A.Tint() { Val = 94000 };
-
-            schemeColor17.Append(saturationModulation4);
-            schemeColor17.Append(luminanceModulation4);
-            schemeColor17.Append(tint4);
-
-            gradientStop4.Append(schemeColor17);
-
-            A.GradientStop gradientStop5 = new A.GradientStop() { Position = 50000 };
-
-            A.SchemeColor schemeColor18 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
-            A.SaturationModulation saturationModulation5 = new A.SaturationModulation() { Val = 110000 };
-            A.LuminanceModulation luminanceModulation5 = new A.LuminanceModulation() { Val = 100000 };
-            A.Shade shade1 = new A.Shade() { Val = 100000 };
-
-            schemeColor18.Append(saturationModulation5);
-            schemeColor18.Append(luminanceModulation5);
-            schemeColor18.Append(shade1);
-
-            gradientStop5.Append(schemeColor18);
-
-            A.GradientStop gradientStop6 = new A.GradientStop() { Position = 100000 };
-
-            A.SchemeColor schemeColor19 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
-            A.LuminanceModulation luminanceModulation6 = new A.LuminanceModulation() { Val = 99000 };
-            A.SaturationModulation saturationModulation6 = new A.SaturationModulation() { Val = 120000 };
-            A.Shade shade2 = new A.Shade() { Val = 78000 };
-
-            schemeColor19.Append(luminanceModulation6);
-            schemeColor19.Append(saturationModulation6);
-            schemeColor19.Append(shade2);
-
-            gradientStop6.Append(schemeColor19);
-
-            gradientStopList2.Append(gradientStop4);
-            gradientStopList2.Append(gradientStop5);
-            gradientStopList2.Append(gradientStop6);
-            A.LinearGradientFill linearGradientFill2 = new A.LinearGradientFill() { Angle = 5400000, Scaled = false };
-
-            gradientFill2.Append(gradientStopList2);
-            gradientFill2.Append(linearGradientFill2);
-
-            fillStyleList1.Append(solidFill9);
-            fillStyleList1.Append(gradientFill1);
-            fillStyleList1.Append(gradientFill2);
-
-            A.LineStyleList lineStyleList1 = new A.LineStyleList();
-
-            A.Outline outline5 = new A.Outline() { Width = 6350, CapType = A.LineCapValues.Flat, CompoundLineType = A.CompoundLineValues.Single, Alignment = A.PenAlignmentValues.Center };
-
-            A.SolidFill solidFill10 = new A.SolidFill();
-            A.SchemeColor schemeColor20 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
-
-            solidFill10.Append(schemeColor20);
-            A.PresetDash presetDash1 = new A.PresetDash() { Val = A.PresetLineDashValues.Solid };
-            A.Miter miter1 = new A.Miter() { Limit = 800000 };
-
-            outline5.Append(solidFill10);
-            outline5.Append(presetDash1);
-            outline5.Append(miter1);
-
-            A.Outline outline6 = new A.Outline() { Width = 12700, CapType = A.LineCapValues.Flat, CompoundLineType = A.CompoundLineValues.Single, Alignment = A.PenAlignmentValues.Center };
-
-            A.SolidFill solidFill11 = new A.SolidFill();
-            A.SchemeColor schemeColor21 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
-
-            solidFill11.Append(schemeColor21);
-            A.PresetDash presetDash2 = new A.PresetDash() { Val = A.PresetLineDashValues.Solid };
-            A.Miter miter2 = new A.Miter() { Limit = 800000 };
-
-            outline6.Append(solidFill11);
-            outline6.Append(presetDash2);
-            outline6.Append(miter2);
-
-            A.Outline outline7 = new A.Outline() { Width = 19050, CapType = A.LineCapValues.Flat, CompoundLineType = A.CompoundLineValues.Single, Alignment = A.PenAlignmentValues.Center };
-
-            A.SolidFill solidFill12 = new A.SolidFill();
-            A.SchemeColor schemeColor22 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
-
-            solidFill12.Append(schemeColor22);
-            A.PresetDash presetDash3 = new A.PresetDash() { Val = A.PresetLineDashValues.Solid };
-            A.Miter miter3 = new A.Miter() { Limit = 800000 };
-
-            outline7.Append(solidFill12);
-            outline7.Append(presetDash3);
-            outline7.Append(miter3);
-
-            lineStyleList1.Append(outline5);
-            lineStyleList1.Append(outline6);
-            lineStyleList1.Append(outline7);
-
-            A.EffectStyleList effectStyleList1 = new A.EffectStyleList();
-
-            A.EffectStyle effectStyle1 = new A.EffectStyle();
-            A.EffectList effectList1 = new A.EffectList();
-
-            effectStyle1.Append(effectList1);
-
-            A.EffectStyle effectStyle2 = new A.EffectStyle();
-            A.EffectList effectList2 = new A.EffectList();
-
-            effectStyle2.Append(effectList2);
-
-            A.EffectStyle effectStyle3 = new A.EffectStyle();
-
-            A.EffectList effectList3 = new A.EffectList();
-
-            A.OuterShadow outerShadow1 = new A.OuterShadow() { BlurRadius = 57150L, Distance = 19050L, Direction = 5400000, Alignment = A.RectangleAlignmentValues.Center, RotateWithShape = false };
-
-            A.RgbColorModelHex rgbColorModelHex11 = new A.RgbColorModelHex() { Val = "000000" };
-            A.Alpha alpha1 = new A.Alpha() { Val = 63000 };
-
-            rgbColorModelHex11.Append(alpha1);
-
-            outerShadow1.Append(rgbColorModelHex11);
-
-            effectList3.Append(outerShadow1);
-
-            effectStyle3.Append(effectList3);
-
-            effectStyleList1.Append(effectStyle1);
-            effectStyleList1.Append(effectStyle2);
-            effectStyleList1.Append(effectStyle3);
-
-            A.BackgroundFillStyleList backgroundFillStyleList1 = new A.BackgroundFillStyleList();
-
-            A.SolidFill solidFill13 = new A.SolidFill();
-            A.SchemeColor schemeColor23 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
-
-            solidFill13.Append(schemeColor23);
-
-            A.SolidFill solidFill14 = new A.SolidFill();
-
-            A.SchemeColor schemeColor24 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
-            A.Tint tint5 = new A.Tint() { Val = 95000 };
-            A.SaturationModulation saturationModulation7 = new A.SaturationModulation() { Val = 170000 };
-
-            schemeColor24.Append(tint5);
-            schemeColor24.Append(saturationModulation7);
-
-            solidFill14.Append(schemeColor24);
-
-            A.GradientFill gradientFill3 = new A.GradientFill() { RotateWithShape = true };
-
-            A.GradientStopList gradientStopList3 = new A.GradientStopList();
-
-            A.GradientStop gradientStop7 = new A.GradientStop() { Position = 0 };
-
-            A.SchemeColor schemeColor25 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
-            A.Tint tint6 = new A.Tint() { Val = 93000 };
-            A.SaturationModulation saturationModulation8 = new A.SaturationModulation() { Val = 150000 };
-            A.Shade shade3 = new A.Shade() { Val = 98000 };
-            A.LuminanceModulation luminanceModulation7 = new A.LuminanceModulation() { Val = 102000 };
-
-            schemeColor25.Append(tint6);
-            schemeColor25.Append(saturationModulation8);
-            schemeColor25.Append(shade3);
-            schemeColor25.Append(luminanceModulation7);
-
-            gradientStop7.Append(schemeColor25);
-
-            A.GradientStop gradientStop8 = new A.GradientStop() { Position = 50000 };
-
-            A.SchemeColor schemeColor26 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
-            A.Tint tint7 = new A.Tint() { Val = 98000 };
-            A.SaturationModulation saturationModulation9 = new A.SaturationModulation() { Val = 130000 };
-            A.Shade shade4 = new A.Shade() { Val = 90000 };
-            A.LuminanceModulation luminanceModulation8 = new A.LuminanceModulation() { Val = 103000 };
-
-            schemeColor26.Append(tint7);
-            schemeColor26.Append(saturationModulation9);
-            schemeColor26.Append(shade4);
-            schemeColor26.Append(luminanceModulation8);
-
-            gradientStop8.Append(schemeColor26);
-
-            A.GradientStop gradientStop9 = new A.GradientStop() { Position = 100000 };
-
-            A.SchemeColor schemeColor27 = new A.SchemeColor() { Val = A.SchemeColorValues.PhColor };
-            A.Shade shade5 = new A.Shade() { Val = 63000 };
-            A.SaturationModulation saturationModulation10 = new A.SaturationModulation() { Val = 120000 };
-
-            schemeColor27.Append(shade5);
-            schemeColor27.Append(saturationModulation10);
-
-            gradientStop9.Append(schemeColor27);
-
-            gradientStopList3.Append(gradientStop7);
-            gradientStopList3.Append(gradientStop8);
-            gradientStopList3.Append(gradientStop9);
-            A.LinearGradientFill linearGradientFill3 = new A.LinearGradientFill() { Angle = 5400000, Scaled = false };
-
-            gradientFill3.Append(gradientStopList3);
-            gradientFill3.Append(linearGradientFill3);
-
-            backgroundFillStyleList1.Append(solidFill13);
-            backgroundFillStyleList1.Append(solidFill14);
-            backgroundFillStyleList1.Append(gradientFill3);
-
-            formatScheme1.Append(fillStyleList1);
-            formatScheme1.Append(lineStyleList1);
-            formatScheme1.Append(effectStyleList1);
-            formatScheme1.Append(backgroundFillStyleList1);
-
-            themeElements1.Append(colorScheme1);
-            themeElements1.Append(fontScheme33);
-            themeElements1.Append(formatScheme1);
-            A.ObjectDefaults objectDefaults1 = new A.ObjectDefaults();
-            A.ExtraColorSchemeList extraColorSchemeList1 = new A.ExtraColorSchemeList();
-
-            A.OfficeStyleSheetExtensionList officeStyleSheetExtensionList1 = new A.OfficeStyleSheetExtensionList();
-
-            A.OfficeStyleSheetExtension officeStyleSheetExtension1 = new A.OfficeStyleSheetExtension() { Uri = "{05A4C25C-085E-4340-85A3-A5531E510DB2}" };
-
-            Thm15.ThemeFamily themeFamily1 = new Thm15.ThemeFamily() { Name = "Office Theme", Id = "{62F939B6-93AF-4DB8-9C6B-D6C7DFDC589F}", Vid = "{4A3C46E8-61CC-4603-A589-7422A47A8E4A}" };
-            themeFamily1.AddNamespaceDeclaration("thm15", "http://schemas.microsoft.com/office/thememl/2012/main");
-
-            officeStyleSheetExtension1.Append(themeFamily1);
-
-            officeStyleSheetExtensionList1.Append(officeStyleSheetExtension1);
-
-            theme1.Append(themeElements1);
-            theme1.Append(objectDefaults1);
-            theme1.Append(extraColorSchemeList1);
-            theme1.Append(officeStyleSheetExtensionList1);
-
-            themePart1.Theme = theme1;
+            stylesheet.Append(numberingFormats1);
+            stylesheet.Append(fonts1);
+            stylesheet.Append(fills1);
+            stylesheet.Append(borders1);
+            stylesheet.Append(cellStyleFormats1);
+            stylesheet.Append(cellFormats1);
+            stylesheet.Append(cellStyles1);
+            stylesheet.Append(differentialFormats1);
+            stylesheet.Append(tableStyles1);
+            stylesheet.Append(colors1);
+            stylesheet.Append(stylesheetExtensionList1);
+
+            workbookStylesPart.Stylesheet = stylesheet;
         }
     }
 }

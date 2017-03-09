@@ -1,12 +1,4 @@
 ﻿using DocumentFormat.OpenXml.Packaging;
-using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Spreadsheet;
-using X15ac = DocumentFormat.OpenXml.Office2013.ExcelAc;
-using Xdr = DocumentFormat.OpenXml.Drawing.Spreadsheet;
-using A = DocumentFormat.OpenXml.Drawing;
-using X14 = DocumentFormat.OpenXml.Office2010.Excel;
-using X15 = DocumentFormat.OpenXml.Office2013.Excel;
-using Thm15 = DocumentFormat.OpenXml.Office2013.Theme;
 
 namespace Sandbox.OpenXML
 {
