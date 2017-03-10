@@ -8,7 +8,21 @@
         public static void Main(string[] args)
         {
             //CreateHyperlinkExample(Environment.CurrentDirectory);
-            DStarExport(Environment.CurrentDirectory);
+            //DStarExport(Environment.CurrentDirectory);
+
+            GetColumnName();
+
+            Console.Read();
+        }
+
+        private static void GetColumnName()
+        {
+            var helper = new ExcelHelper();
+
+            for (var index = 0; index <= (25 * 2); index++)
+            {
+                Console.WriteLine(helper.GetColumnName(index));
+            }
         }
 
         private static void CreateHyperlinkExample(string directory)
