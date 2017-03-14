@@ -55,6 +55,8 @@ If such investigation does not result in a satisfactory explanation, then the Ex
                 Console.WriteLine("TEXT = {0}", item.Text);
                 Console.WriteLine(string.Empty);
             }
+
+            results = Find("there are no links");
         }
 
         private static void DumpHRefs(string inputString)
