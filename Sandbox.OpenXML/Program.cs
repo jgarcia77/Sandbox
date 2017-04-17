@@ -10,7 +10,9 @@
             //CreateHyperlinkExample(Environment.CurrentDirectory);
             //DStarExport(Environment.CurrentDirectory);
 
-            GetColumnName();
+            //GetColumnName();
+
+            ScatterChart(Environment.CurrentDirectory);
 
             Console.Read();
         }
@@ -37,6 +39,13 @@
             var export = new RevealExport();
 
             export.CreatePackage(Path.Combine(directory, "DStarExport.xlsx"));
+        }
+
+        private static void ScatterChart(string directory)
+        {
+            var chart = new ScatterChartProxy();
+
+            chart.CreatePackage(Path.Combine(directory, "ScatterChart.xlsx"));
         }
     }
 }
