@@ -1804,11 +1804,11 @@ namespace Sandbox.OpenXML
 
             Xdr.FromMarker fromMarker1 = new Xdr.FromMarker();
             Xdr.ColumnId columnId1 = new Xdr.ColumnId();
-            columnId1.Text = "3";
+            columnId1.Text = "4";
             Xdr.ColumnOffset columnOffset1 = new Xdr.ColumnOffset();
             columnOffset1.Text = "371475";
             Xdr.RowId rowId1 = new Xdr.RowId();
-            rowId1.Text = "1";
+            rowId1.Text = "2";
             Xdr.RowOffset rowOffset1 = new Xdr.RowOffset();
             rowOffset1.Text = "6350";
 
@@ -2778,7 +2778,7 @@ namespace Sandbox.OpenXML
             scatterChart1.Append(varyColors1);
             scatterChart1.Append(scatterChartSeries1);
             scatterChart1.Append(scatterChartSeries2);
-            scatterChart1.Append(dataLabels1);
+            //scatterChart1.Append(dataLabels1);
             scatterChart1.Append(axisId1);
             scatterChart1.Append(axisId2);
 
@@ -2957,11 +2957,11 @@ namespace Sandbox.OpenXML
 
             valueAxis1.Append(axisId3);
             valueAxis1.Append(scaling1);
-            valueAxis1.Append(delete1);
+            //valueAxis1.Append(delete1);
             valueAxis1.Append(axisPosition1);
             valueAxis1.Append(majorGridlines1);
             valueAxis1.Append(title1);
-            valueAxis1.Append(numberingFormat1);
+            //valueAxis1.Append(numberingFormat1);
             valueAxis1.Append(majorTickMark1);
             valueAxis1.Append(minorTickMark1);
             valueAxis1.Append(tickLabelPosition1);
@@ -3184,11 +3184,11 @@ namespace Sandbox.OpenXML
             C.DisplayBlanksAs displayBlanksAs1 = new C.DisplayBlanksAs() { Val = C.DisplayBlanksAsValues.Gap };
             C.ShowDataLabelsOverMaximum showDataLabelsOverMaximum1 = new C.ShowDataLabelsOverMaximum() { Val = false };
 
-            chart1.Append(autoTitleDeleted1);
+            //chart1.Append(autoTitleDeleted1);
             chart1.Append(plotArea1);
-            chart1.Append(plotVisibleOnly1);
-            chart1.Append(displayBlanksAs1);
-            chart1.Append(showDataLabelsOverMaximum1);
+            //chart1.Append(plotVisibleOnly1);
+            //chart1.Append(displayBlanksAs1);
+            //chart1.Append(showDataLabelsOverMaximum1);
 
             C.ShapeProperties shapeProperties2 = new C.ShapeProperties();
 
@@ -3241,14 +3241,14 @@ namespace Sandbox.OpenXML
             printSettings1.Append(pageMargins2);
             printSettings1.Append(pageSetup2);
 
-            chartSpace1.Append(date19041);
-            chartSpace1.Append(editingLanguage1);
+            //chartSpace1.Append(date19041);
+            //chartSpace1.Append(editingLanguage1);
             chartSpace1.Append(roundedCorners1);
-            chartSpace1.Append(alternateContent2);
+            //chartSpace1.Append(alternateContent2);
             chartSpace1.Append(chart1);
-            chartSpace1.Append(shapeProperties2);
-            chartSpace1.Append(textProperties4);
-            chartSpace1.Append(printSettings1);
+            //chartSpace1.Append(shapeProperties2);
+            //chartSpace1.Append(textProperties4);
+            //chartSpace1.Append(printSettings1);
 
             chartPart1.ChartSpace = chartSpace1;
         }
